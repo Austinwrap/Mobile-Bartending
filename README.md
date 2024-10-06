@@ -141,14 +141,6 @@
             <p class="tagline">Mobile Bartending Services for All Occasions</p>
         </div>
     </header>
-
-    <!-- Navigation -->
-    <nav class="main-nav">
-        <a href="#services">Services</a>
-        <a href="#packages">Packages</a>
-        <a href="#contact">Contact</a>
-    </nav>
-
     <!-- Main Content -->
     <main>
         <!-- Services Section -->
