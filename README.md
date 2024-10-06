@@ -147,7 +147,7 @@
     <header class="header" id="home">
         <div class="container">
             <div class="logo">
-                <img src="logo.png" alt="Raise A Glass LLC">
+                <img src="champagne-toast-logo.png" alt="Raise A Glass LLC Logo">
             </div>
             <h1>Raise A Glass LLC</h1>
             <p class="tagline">Mobile Bartending Services for All Occasions</p>
