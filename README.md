@@ -182,7 +182,7 @@
         <section class="contact" id="contact">
             <div class="container">
                 <h2>Contact Us</h2>
-                <p>Call: (555) 555-5555</p>
+                <p>Call: (860) 517-6602</p>
                 <p>Email: <a href="mailto:info@raiseaglass.com">info@raiseaglass.com</a></p>
                 <form action="submit_inquiry.php" method="post">
                     <label for="name">Name:</label>
