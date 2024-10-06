@@ -181,10 +181,6 @@
     <footer class="footer">
         <div class="container">
             <p>&copy; 2024 Raise A Glass LLC - Mobile Event Bartending</p>
-            <p>Follow us:
-                <a href="#"><i class="fab fa-instagram"></i> Instagram</a> |
-                <a href="#"><i class="fab fa-facebook"></i> Facebook</a>
-            </p>
         </div>
     </footer>
 </body>
