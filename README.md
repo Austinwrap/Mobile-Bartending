@@ -164,19 +164,19 @@
             </div>
         </section>
 
-        <!-- Packages Section -->
-        <section class="packages" id="packages">
-            <div class="container">
-                <h2>Our Packages</h2>
-                <ul>
-                    <li><strong><i class="fas fa-beer"></i> Beer & Wine Package:</strong> Enjoy unlimited beer and wine service for your guests. Perfect for any event looking for simplicity and elegance.</li>
-                    <li><strong><i class="fas fa-glass-cheers"></i> Signature Cocktails Package:</strong> Delight your guests with a selection of signature cocktails crafted to perfection. Includes two seasonal specialty drinks.</li>
-                    <li><strong><i class="fas fa-water"></i> Hydration Station:</strong> Add unlimited water, lemonade, and iced tea for just $100.</li>
-                    <li><strong><i class="fas fa-mug-hot"></i> Hot Coffee & Tea Bar:</strong> Warm up your guests with our coffee and tea station, available for $250.</li>
-                </ul>
-                <a href="#contact" class="btn">See Packages</a>
-            </div>
-        </section>
+<!-- Packages Section -->
+<section class="packages" id="packages">
+    <div class="container">
+        <h2>Our Packages</h2>
+        <ul>
+            <li><strong><i class="fas fa-user-tie"></i> Bartender Only:</strong> You provide everything (bar, alcohol, ice, etc.). Raeanne bartends for $500 plus tips (up to 100 guests).</li>
+            <li><strong><i class="fas fa-glass-whiskey"></i> Essentials Package:</strong> We provide cups, straws, mixers, garnishes, ice, and a display. You provide the alcohol. Price: $750 plus tips.</li>
+            <li><strong><i class="fas fa-cocktail"></i> Ultimate Package:</strong> Includes everything in the Essentials Package plus unlimited water, lemonade, iced tea, and a coffee & tea bar. Price: $1,000 plus tips.</li>
+            <li><strong><i class="fas fa-users"></i> Additional Bartender:</strong> For events over 100 guests, an additional bartender will be provided for $250. Alcohol is always provided by the client.</li>
+        </ul>
+        <a href="#contact" class="btn">See Packages</a>
+    </div>
+</section>
 
         <!-- Contact Section -->
         <section class="contact" id="contact">
