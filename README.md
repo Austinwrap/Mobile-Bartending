@@ -39,15 +39,6 @@
             border-bottom: 1px solid #ddd;
         }
 
-        .header .logo {
-            text-align: center;
-            margin-bottom: 10px;
-        }
-
-        .header .logo img {
-            height: 80px;
-        }
-
         .header .tagline {
             text-align: center;
             font-size: 1.2em;
@@ -146,9 +137,6 @@
     <!-- Header -->
     <header class="header" id="home">
         <div class="container">
-            <div class="logo">
-                <img src="champagne-toast-logo.png" alt="Raise A Glass LLC Logo">
-            </div>
             <h1>Raise A Glass LLC</h1>
             <p class="tagline">Mobile Bartending Services for All Occasions</p>
         </div>
