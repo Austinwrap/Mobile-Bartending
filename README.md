@@ -184,11 +184,6 @@
         <h2>Contact Us</h2>
         <p>Call: (860) 517-6602</p>
         <p>Email: <a href="mailto:raiseaglassservices@gmail.com">raiseaglassservices@gmail.com</a></p>
-        <label for="name">Name:</label>
-        <input type="text" id="name" name="name" required>
-        
-        <label for="email">Email:</label>
-        <input type="email" id="email" name="email" required>
     </div>
 </section>
 </main>
