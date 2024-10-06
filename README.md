@@ -160,7 +160,6 @@
                     <li><strong><i class="fas fa-cocktail"></i> Signature Cocktails & Specialty Menus:</strong> Crafted with care for an exceptional experience.</li>
                     <li><strong><i class="fas fa-coffee"></i> Hot Coffee & Tea Bar:</strong> Cozy drinks to keep everyone warm and happy.</li>
                 </ul>
-                <a href="#contact" class="btn">Book Now</a>
             </div>
         </section>
 
