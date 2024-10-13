@@ -172,7 +172,7 @@
 <section class="contact" id="contact">
     <div class="container">
         <h2>Contact Us</h2>
-        <p>Call: (860) 517-6602</p>
+        <p>Call: Raeanne (860) 517-6602</p>
         <p>Email: <a href="mailto:raiseaglassservices@gmail.com">raiseaglassservices@gmail.com</a></p>
     </div>
 </section>
