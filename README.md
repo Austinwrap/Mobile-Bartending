@@ -1,4 +1,3 @@
-
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -21,7 +20,7 @@
         body {
             font-family: 'Montserrat', sans-serif;
             color: #333;
-            background-color: #e0e6ed;
+            background: linear-gradient(to bottom right, #ffdde1, #ee9ca7);
             background-size: cover;
             background-attachment: fixed;
         }
@@ -36,18 +35,18 @@
         }
 
         h2 {
-            color: #1c3d5a;
+            color: #3d405b;
             font-size: 2.5em;
             margin-bottom: 20px;
-            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.3);
+            text-align: center;
         }
 
         /* Header */
         .header {
-            background: #1c3d5a;
-            color: #e8f1f5;
+            background: #3d405b;
+            color: #f4f1de;
             padding: 60px 0;
-            border-bottom: 4px solid #2b5876;
+            border-bottom: 4px solid #e07a5f;
             text-shadow: 2px 2px 5px #333;
             position: relative;
         }
@@ -55,48 +54,46 @@
         .header .tagline {
             text-align: center;
             font-size: 1.8em;
-            color: #f8e8f2;
+            color: #f2cc8f;
         }
 
         /* Navigation */
         .main-nav {
-            background-color: #2b5876;
+            background-color: #e07a5f;
             text-align: center;
-            padding: 15px 0;
-            position: sticky;
-            top: 0;
+            padding: 10px 0;
+            margin-top: 20px;
             z-index: 1000;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
         }
 
         .main-nav a {
-            color: #f0f4f8;
+            color: #fff;
             text-decoration: none;
-            margin: 0 30px;
-            font-size: 1.3em;
+            margin: 0 15px;
+            font-size: 1.1em;
             transition: color 0.3s;
         }
 
         .main-nav a:hover {
-            color: #a3cbe1;
+            color: #ffddd2;
         }
 
         /* Buttons */
         .btn {
             display: inline-block;
-            background-color: #4b2e83;
+            background: linear-gradient(to right, #e07a5f, #3d405b);
             color: #fff;
             padding: 15px 30px;
             text-decoration: none;
             margin-top: 30px;
             border-radius: 12px;
             box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
-            transition: background-color 0.3s, box-shadow 0.3s;
+            transition: background 0.3s, box-shadow 0.3s;
             font-size: 1.2em;
         }
 
         .btn:hover {
-            background-color: #3b6c8e;
+            background: linear-gradient(to right, #3d405b, #e07a5f);
             box-shadow: 7px 7px 20px rgba(0, 0, 0, 0.4);
         }
 
@@ -105,7 +102,7 @@
             position: absolute;
             height: 100%;
             width: 10%;
-            background: rgba(210, 225, 240, 0.8);
+            background: rgba(255, 223, 211, 0.8);
             top: 0;
             z-index: -1;
             border-radius: 0 25px 25px 0;
@@ -113,23 +110,23 @@
 
         .left-column {
             left: 0;
-            border-right: 4px solid #2b5876;
+            border-right: 4px solid #3d405b;
             box-shadow: 10px 0 15px -5px #6b4226;
         }
 
         .right-column {
             right: 0;
-            border-left: 4px solid #2b5876;
+            border-left: 4px solid #3d405b;
             box-shadow: -10px 0 15px -5px #6b4226;
             border-radius: 25px 0 0 25px;
         }
 
         /* Sections */
         section {
-            padding: 80px 0;
+            padding: 100px 0;
             text-align: center;
-            background: rgba(240, 245, 250, 0.95);
-            border: 4px solid #2b5876;
+            background: rgba(255, 245, 238, 0.95);
+            border: 4px solid #e07a5f;
             margin: 40px 0;
             box-shadow: 8px 8px 20px rgba(0, 0, 0, 0.3);
             border-radius: 25px;
@@ -157,17 +154,17 @@
 
         /* Footer */
         .footer {
-            background-color: #1c3d5a;
-            color: #ffdda1;
+            background-color: #3d405b;
+            color: #ffddd2;
             padding: 40px 0;
             text-align: center;
             font-size: 1.1em;
-            border-top: 4px solid #3b6c8e;
+            border-top: 4px solid #81b29a;
             box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3);
         }
 
         .footer a {
-            color: #ffdda1;
+            color: #ffddd2;
             text-decoration: none;
             margin: 0 10px;
             font-size: 1.3em;
@@ -184,9 +181,16 @@
                 width: 90%;
             }
 
+            .main-nav {
+                position: relative;
+                top: 0;
+                width: 100%;
+                padding: 10px 0;
+            }
+
             .main-nav a {
-                display: block;
-                margin: 10px 0;
+                margin: 5px;
+                font-size: 1em;
             }
 
             .columns {
