@@ -395,7 +395,9 @@ if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["submit_booking"])) {
     <section class="info-section" id="booking">
       <div class="container">
         <h2>Book Your Event</h2>
-        <?php if (!empty($booking_message)) { echo '<p style="text-align:center; font-size:1.2em; color:#3d405b;">
+        <?php 
+          if (!empty($booking_message)) { 
+              echo '<p style="text-align:center; font-size:1.2em; color:#3d405b;">
         <form class="info-form" id="bookingForm" action="" method="POST">
           <label for="name">Your Name</label>
           <input type="text" name="name" id="name" placeholder="Your awesome name" required>
