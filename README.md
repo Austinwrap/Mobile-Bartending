@@ -444,7 +444,10 @@
         <div class="booking-calendar">
           <!-- Booking Form Column -->
           <div class="booking-form">
-            <form class="info-form" id="bookingForm" action="#" method="POST">
+            <!-- Note: Replace the action URL below with your form service endpoint 
+                 so that submissions are routed to raiseaglassservices@gmail.com -->
+            <form class="info-form" id="bookingForm" action="https://formspree.io/f/YOUR_BOOKING_FORM_ID" method="POST">
+              <input type="hidden" name="_subject" value="New Booking Request">
               <label for="name">Your Name</label>
               <input type="text" name="name" id="name" placeholder="Your awesome name" required>
               
@@ -498,7 +501,10 @@
     <section class="info-section" id="quote">
       <div class="container">
         <h2>Quote Generator</h2>
-        <form class="info-form" id="quoteForm" action="#" method="POST">
+        <!-- Note: Replace the action URL below with your form service endpoint 
+             so that submissions are routed to raiseaglassservices@gmail.com -->
+        <form class="info-form" id="quoteForm" action="https://formspree.io/f/YOUR_QUOTE_FORM_ID" method="POST">
+          <input type="hidden" name="_subject" value="New Quote Request">
           <label for="qName">Your Name</label>
           <input type="text" id="qName" name="qName" placeholder="Your Name" required>
           
@@ -657,11 +663,12 @@
         $("#popupQuoteResult").html("Estimated Quote: $" + total);
       });
       
-      // Slot Machine Game Logic
+      // Slot Machine Game Logic (Boosted Jackpot)
       var bank = 1000;
       var bet = 50;
+      // Updated multipliers: doubled values for bigger winnings
       var slotEmojis = ["🍹", "🍸", "🍺", "🍷", "🍾"];
-      var multipliers = { "🍹": 5, "🍸": 10, "🍺": 3, "🍷": 8, "🍾": 15 };
+      var multipliers = { "🍹": 10, "🍸": 20, "🍺": 6, "🍷": 16, "🍾": 30 };
       
       $("#openSlotMachine").click(function(){
         $("#slotMachinePopup").show();
