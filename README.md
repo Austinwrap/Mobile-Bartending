@@ -1,16 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Raise A Glass LLC - Event Bartending</title>
   <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet" />
   <!-- Font Awesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
-  <!-- jQuery UI CSS for the datepicker -->
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <!-- Inline CSS -->
+  <!-- jQuery UI CSS for datepicker and draggable -->
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css" />
   <style>
     /* RESET & TYPOGRAPHY */
     * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -32,7 +31,7 @@
     }
     h2 { color: #3d405b; font-size: 2.5em; margin-bottom: 20px; text-align: center; }
     
-    /* FUN FACT TICKER */
+    /* FUN TICKER (Top Bar) */
     #fun-fact-box {
       position: fixed;
       top: 0;
@@ -258,7 +257,106 @@
       .main-nav a { margin: 5px; font-size: 1em; }
       .columns { display: none; }
       .btn { padding: 12px 25px; font-size: 1em; }
+      .booking-calendar { flex-direction: column; }
+      .booking-calendar > div { width: 100%; margin-bottom: 20px; }
     }
+    
+    /* Booking & Calendar Combined */
+    .booking-calendar {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 20px;
+    }
+    .booking-calendar .booking-form {
+      flex: 1;
+    }
+    .booking-calendar .calendar-container {
+      flex: 1;
+      max-width: 350px;
+    }
+    
+    /* Floating Buttons for Pop-Ups */
+    .floating-btn {
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      margin: 5px;
+      background: #3d405b;
+      color: #fff;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      z-index: 10001;
+      box-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+    }
+    .floating-btn:hover { background: #e07a5f; }
+    
+    /* Pop-Up Windows */
+    .popup {
+      position: fixed;
+      top: 50px;
+      left: 50px;
+      background: #fff;
+      border: 2px solid #3d405b;
+      border-radius: 10px;
+      z-index: 10000;
+      box-shadow: 5px 5px 20px rgba(0,0,0,0.5);
+    }
+    .popup-header {
+      background: #3d405b;
+      color: #fff;
+      padding: 8px;
+      cursor: move;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+    .popup-header .popup-title { font-weight: bold; }
+    .popup-header button {
+      background: transparent;
+      border: none;
+      color: #fff;
+      font-size: 1em;
+      cursor: pointer;
+      margin-left: 5px;
+    }
+    .popup-content {
+      padding: 10px;
+    }
+    .popup .hidden { display: none; }
+    
+    /* Custom Styles for Pop-Ups */
+    /* Quick Quote Pop-Up: Bigger & Different Color */
+    #quotePopup {
+      width: 350px;
+      background: #fef9e7;
+      border-color: #d4ac0d;
+    }
+    /* Slot Machine Pop-Up: Cuter with Pastel/Neon Accents */
+    #slotMachinePopup {
+      width: 350px;
+      background: #e8f8f5;
+      border-color: #16a085;
+    }
+    /* Neon Effect for Slot Machine Display */
+    .neon {
+      font-size: 3em;
+      padding: 10px;
+      border: 3px solid #0ff;
+      border-radius: 8px;
+      text-align: center;
+      animation: neonGlow 1.5s ease-in-out infinite alternate;
+      margin-bottom: 10px;
+    }
+    @keyframes neonGlow {
+      from { box-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff; }
+      to { box-shadow: 0 0 20px #0ff, 0 0 30px #0ff, 0 0 40px #0ff; }
+    }
+    
   </style>
 </head>
 <body>
@@ -295,7 +393,6 @@
     <a href="#packages">Packages</a>
     <a href="#booking">Book Your Event</a>
     <a href="#quote">Quote Generator</a>
-    <a href="#calendar">Calendar</a>
     <a href="#contact">Contact Us</a>
   </nav>
   
@@ -310,7 +407,7 @@
       <div class="container">
         <h2>About Raeanne</h2>
         <p>
-Hey, I’m Rae! 🍸 With over 7 years of bartending experience, I bring a fun, professional touch to every event. Whether it’s a wedding, private party, or corporate gathering, I’ll craft the perfect drinks to match the vibe. Let’s make your event unforgettable—contact me for a free quote! 🍾✨
+          Hi, I'm Raeanne! With over 7 years of bartending experience, I blend creativity and passion to bring unforgettable experiences to every event. I love turning gatherings into celebrations—cheers to great times and even greater drinks!
         </p>
       </div>
     </section>
@@ -341,66 +438,74 @@ Hey, I’m Rae! 🍸 With over 7 years of bartending experience, I bring a fun, 
       </div>
     </section>
     
-    <!-- BOOKING SECTION -->
+    <!-- BOOKING & CALENDAR COMBINED SECTION -->
     <section class="info-section" id="booking">
       <div class="container">
         <h2>Book Your Event</h2>
-        
-        <form class="info-form" id="bookingForm" action="" method="POST">
-          <label for="name">Your Name</label>
-          <input type="text" name="name" id="name" placeholder="Your awesome name" required>
-          
-          <label for="email">Your Email</label>
-          <input type="email" name="email" id="email" placeholder="you@example.com" required>
-          
-          <label for="phone">Your Phone Number</label>
-          <input type="tel" name="phone" id="phone" placeholder="(123) 456-7890" required>
-          
-          <label for="address">Your Address</label>
-          <input type="text" name="address" id="address" placeholder="Street, City, ZIP">
-          
-          <label for="eventDate">Event Date</label>
-          <input type="text" name="eventDate" id="eventDate" placeholder="MM/DD/YYYY" required>
-          
-          <label for="headcount">Guest Count</label>
-          <input type="number" name="headcount" id="headcount" placeholder="How many?" required>
-          
-          <label for="eventType">Event Type</label>
-          <select name="eventType" id="eventType" required>
-            <option value="backyard">Backyard Party</option>
-            <option value="wedding">Wedding</option>
-            <option value="other">Other</option>
-          </select>
-          
-          <label for="location">Event Location</label>
-          <input type="text" name="location" id="location" placeholder="Where's the party?" required>
-          
-          <label for="barService">Need a mobile bar?</label>
-          <select name="barService" id="barService" required>
-            <option value="yes">Yes, please!</option>
-            <option value="no">No, thanks!</option>
-          </select>
-          
-          <label for="comments">Additional Party Details</label>
-          <textarea name="comments" id="comments" rows="3" placeholder="Tell us a bit about your celebration"></textarea>
-          
-          <button type="submit" name="submit_booking">Submit Booking Request</button>
-        </form>
+        <div class="booking-calendar">
+          <!-- Booking Form Column -->
+          <div class="booking-form">
+            <form class="info-form" id="bookingForm" action="#" method="POST">
+              <label for="name">Your Name</label>
+              <input type="text" name="name" id="name" placeholder="Your awesome name" required>
+              
+              <label for="email">Your Email</label>
+              <input type="email" name="email" id="email" placeholder="you@example.com" required>
+              
+              <label for="phone">Your Phone Number</label>
+              <input type="tel" name="phone" id="phone" placeholder="(123) 456-7890" required>
+              
+              <label for="address">Your Address</label>
+              <input type="text" name="address" id="address" placeholder="Street, City, ZIP">
+              
+              <label for="eventDate">Event Date</label>
+              <input type="text" name="eventDate" id="eventDate" placeholder="MM/DD/YYYY" required>
+              
+              <label for="headcount">Guest Count</label>
+              <input type="number" name="headcount" id="headcount" placeholder="How many?" required>
+              
+              <label for="eventType">Event Type</label>
+              <select name="eventType" id="eventType" required>
+                <option value="backyard">Backyard Party</option>
+                <option value="wedding">Wedding</option>
+                <option value="other">Other</option>
+              </select>
+              
+              <label for="location">Event Location</label>
+              <input type="text" name="location" id="location" placeholder="Where's the party?" required>
+              
+              <label for="barService">Need a mobile bar?</label>
+              <select name="barService" id="barService" required>
+                <option value="yes">Yes, please!</option>
+                <option value="no">No, thanks!</option>
+              </select>
+              
+              <label for="comments">Additional Party Details</label>
+              <textarea name="comments" id="comments" rows="3" placeholder="Tell us a bit about your celebration"></textarea>
+              
+              <button type="submit">Submit Booking Request</button>
+            </form>
+          </div>
+          <!-- Calendar Column -->
+          <div class="calendar-container">
+            <h3>Choose Your Date</h3>
+            <div id="datepicker" style="margin: 0 auto;"></div>
+          </div>
+        </div>
       </div>
     </section>
     
-    <!-- QUOTE GENERATOR SECTION -->
+    <!-- QUOTE GENERATOR SECTION (Existing Section) -->
     <section class="info-section" id="quote">
       <div class="container">
         <h2>Quote Generator</h2>
-       
-        <form class="info-form" id="quoteForm" method="POST" action="">
+        <form class="info-form" id="quoteForm" action="#" method="POST">
           <label for="qName">Your Name</label>
           <input type="text" id="qName" name="qName" placeholder="Your Name" required>
           
           <label for="qEmail">Your Email</label>
           <input type="email" id="qEmail" name="qEmail" placeholder="you@example.com" required>
-
+  
           <label for="qHeadcount">Number of Guests</label>
           <input type="number" id="qHeadcount" name="qHeadcount" placeholder="Enter guest count" required>
           
@@ -423,18 +528,9 @@ Hey, I’m Rae! 🍸 With over 7 years of bartending experience, I bring a fun, 
           
           <!-- Hidden field to store calculated quote -->
           <input type="hidden" id="calculatedQuote" name="calculatedQuote" value="">
-
-          <button type="submit" name="submit_quote">Send Quote Request</button>
+  
+          <button type="submit">Send Quote Request</button>
         </form>
-      </div>
-    </section>
-    
-    <!-- CALENDAR SECTION -->
-    <section class="info-section" id="calendar">
-      <div class="container">
-        <h2>Event Calendar</h2>
-        <p>Select a date to see if Raeanne is available!</p>
-        <div id="datepicker" style="margin: 0 auto; width: 300px;"></div>
       </div>
     </section>
     
@@ -456,134 +552,266 @@ Hey, I’m Rae! 🍸 With over 7 years of bartending experience, I bring a fun, 
     </div>
   </footer>
   
-  <!-- JavaScript: jQuery, jQuery UI, and Inline Scripts -->
+  <!-- Floating Buttons to Open Pop-Ups -->
+  <button id="openQuotePopup" class="floating-btn" style="right:20px;">Quick Quote</button>
+  <button id="openSlotMachine" class="floating-btn" style="right:150px;">Play Slots</button>
+  
+  <!-- Pop-Up: Quick Quote Calculator (Draggable) -->
+  <div id="quotePopup" class="popup" style="display:none;">
+    <div class="popup-header">
+      <span class="popup-title">Quick Quote Calculator</span>
+      <div>
+        <button class="popup-minimize">_</button>
+        <button class="popup-close">X</button>
+      </div>
+    </div>
+    <div class="popup-content">
+      <label>Guest Count:</label>
+      <input type="number" id="popupGuestCount" placeholder="Enter guest count" min="1" />
+      <label>Event Type:</label>
+      <select id="popupEventType">
+        <option value="backyard">Backyard Party</option>
+        <option value="wedding">Wedding</option>
+        <option value="other">Other</option>
+      </select>
+      <label>Need a Mobile Bar?</label>
+      <select id="popupBarService">
+        <option value="yes">Yes</option>
+        <option value="no">No</option>
+      </select>
+      <button id="popupCalculateQuote">Calculate Quote</button>
+      <div id="popupQuoteResult" style="margin-top:10px; font-weight:bold;"></div>
+    </div>
+  </div>
+  
+  <!-- Pop-Up: Bartender Slot Machine Game (Draggable) -->
+  <div id="slotMachinePopup" class="popup" style="display:none;">
+    <div class="popup-header">
+      <span class="popup-title">Bartender Slot Machine</span>
+      <button class="popup-close">X</button>
+    </div>
+    <div class="popup-content">
+      <div id="bankDisplay" style="font-weight:bold; margin-bottom:10px;">Bank: $1000</div>
+      <div id="slotDisplay" class="neon">
+        <span id="slot1">?</span>
+        <span id="slot2">?</span>
+        <span id="slot3">?</span>
+      </div>
+      <button id="spinButton">Spin (Cost: $50)</button>
+      <button id="cashOutButton" style="margin-top:10px;">Cash Out</button>
+      <div id="slotResult" style="margin-top:10px; font-weight:bold;"></div>
+    </div>
+  </div>
+  
+  <!-- jQuery, jQuery UI, and Inline Scripts -->
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
     $(document).ready(function(){
       // Initialize datepickers
       $("#eventDate").datepicker({ minDate: 0, dateFormat: "mm/dd/yy" });
-      $("#datepicker").datepicker({
-        minDate: 0,
-        onSelect: function(dateText) {
-          alert("You selected " + dateText + ". To book this date, please use the booking form above!");
-        }
-      });
+      $("#datepicker").datepicker({ minDate: 0 });
       
-      // Quote generator logic: Calculate and store the quote value
+      // Quote generator logic (in main section)
       $("#calculateQuote").click(function(){
         var headcount = parseInt($("#qHeadcount").val());
         var eventType = $("#qEventType").val();
         var barService = $("#qBarService").val();
-        
         if (isNaN(headcount) || headcount <= 0) {
           $("#quoteResult").html("Please enter a valid number of guests.");
           return;
         }
-        
         var basePrice = 200, pricePerGuest = 10;
         if (eventType === "wedding") { 
           basePrice = 500; 
           pricePerGuest = 20; 
         }
         var total = basePrice + (headcount * pricePerGuest);
-        if (barService === "yes") { 
-          total += 150; 
-        }
+        if (barService === "yes") { total += 150; }
         $("#quoteResult").html("Estimated Quote: $" + total);
-        $("#calculatedQuote").val(total); // Store the calculated quote in the hidden input
+        $("#calculatedQuote").val(total);
       });
       
-      // Fun Fact Ticker
+      // Quick Quote Pop-Up Logic
+      $("#openQuotePopup").click(function(){
+        $("#quotePopup").show();
+      });
+      $("#quotePopup").draggable({ handle: ".popup-header" });
+      $("#quotePopup .popup-close").click(function(){
+        $("#quotePopup").hide();
+      });
+      $("#quotePopup .popup-minimize").click(function(){
+        $("#quotePopup .popup-content").toggle();
+      });
+      $("#popupCalculateQuote").click(function(){
+        var headcount = parseInt($("#popupGuestCount").val());
+        var eventType = $("#popupEventType").val();
+        var barService = $("#popupBarService").val();
+        if (isNaN(headcount) || headcount <= 0) {
+          $("#popupQuoteResult").html("Please enter a valid guest count.");
+          return;
+        }
+        var basePrice = 200, pricePerGuest = 10;
+        if (eventType === "wedding") { basePrice = 500; pricePerGuest = 20; }
+        var total = basePrice + (headcount * pricePerGuest);
+        if (barService === "yes") { total += 150; }
+        $("#popupQuoteResult").html("Estimated Quote: $" + total);
+      });
+      
+      // Slot Machine Game Logic
+      var bank = 1000;
+      var bet = 50;
+      var slotEmojis = ["🍹", "🍸", "🍺", "🍷", "🍾"];
+      var multipliers = { "🍹": 5, "🍸": 10, "🍺": 3, "🍷": 8, "🍾": 15 };
+      
+      $("#openSlotMachine").click(function(){
+        $("#slotMachinePopup").show();
+      });
+      $("#slotMachinePopup").draggable({ handle: ".popup-header" });
+      $("#slotMachinePopup .popup-close").click(function(){
+        $("#slotMachinePopup").hide();
+      });
+      
+      $("#spinButton").click(function(){
+        if (bank < bet) {
+          $("#slotResult").html("Insufficient funds!");
+          return;
+        }
+        bank -= bet;
+        $("#bankDisplay").html("Bank: $" + bank);
+        // Randomly choose three emojis
+        var s1 = slotEmojis[Math.floor(Math.random() * slotEmojis.length)];
+        var s2 = slotEmojis[Math.floor(Math.random() * slotEmojis.length)];
+        var s3 = slotEmojis[Math.floor(Math.random() * slotEmojis.length)];
+        $("#slot1").html(s1);
+        $("#slot2").html(s2);
+        $("#slot3").html(s3);
+        // Check if all three match
+        if (s1 === s2 && s2 === s3) {
+          var payout = bet * multipliers[s1];
+          bank += payout;
+          $("#slotResult").html("Jackpot! You won $" + payout + "!");
+        } else {
+          $("#slotResult").html("No win. Try again!");
+        }
+        $("#bankDisplay").html("Bank: $" + bank);
+      });
+      
+      $("#cashOutButton").click(function(){
+        alert("You cashed out with $" + bank + " in your bank!");
+        bank = 1000;
+        $("#bankDisplay").html("Bank: $" + bank);
+        $("#slotResult").html("");
+        $("#slot1, #slot2, #slot3").html("?");
+      });
+      
+      // Fun Fact Ticker: 100 Fun Facts about Connecticut & Parties
       var facts = [
-        "Mixology blends art and science in every cocktail.",
-        "Modern bartenders combine tradition with innovation.",
-        "The craft cocktail movement is thriving worldwide.",
-        "Sustainable practices are reshaping bar culture.",
-        "Seasonal ingredients add a fresh twist to classic drinks.",
-        "Unique garnishes elevate both aroma and presentation.",
-        "Signature cocktails tell a story with every sip.",
-        "Bartenders are creative problem solvers behind the bar.",
-        "Local craft spirits fuel modern mixology.",
-        "Molecular techniques inspire new drink recipes.",
-        "Creative ice shapes add personality to cocktails.",
-        "Custom infusions can transform a standard drink.",
-        "Presentation is as crucial as flavor in a cocktail.",
-        "Menus are curated with passion and precision.",
-        "Every drink can be a mini masterpiece.",
-        "Mixing cocktails is a sensory journey.",
-        "Rigorous training perfects the art of bartending.",
-        "A perfect cocktail balances sweet, sour, bitter, and savory.",
-        "Classic drinks inspire bold, modern creations.",
-        "Craft cocktails elevate any social experience.",
-        "Local ingredients spark innovative recipes.",
-        "Ambiance and presentation make every event special.",
-        "Personalized drinks make events unforgettable.",
-        "Tradition meets modern technique in every cocktail.",
-        "Every sip of a well-crafted drink tells a story.",
-        "Signature drinks can become cultural icons.",
-        "Artisan bars are emerging in every major city.",
-        "Competitions showcase the best in mixology.",
-        "Immersive experiences are redefining cocktail culture.",
-        "Handcrafted drinks celebrate quality and passion.",
-        "Attention to detail is key in every cocktail.",
-        "Performance art meets mixology behind the bar.",
-        "Social media transforms cocktail trends.",
-        "Local distilleries drive innovative recipes.",
-        "Precision in measuring ingredients ensures perfect flavor.",
-        "Innovative tools simplify cocktail making.",
-        "Every cocktail is a canvas for creative expression.",
-        "Garnishes can be as inventive as the drink itself.",
-        "Collaboration between chefs and bartenders sparks flavor pairings.",
-        "Custom cocktails create lasting memories.",
-        "Experimentation is at the heart of modern mixology.",
-        "Refreshing cocktails are a summer staple.",
-        "Quality ingredients make all the difference.",
-        "Live cocktail demos engage and delight audiences.",
-        "Shaking and stirring are foundational mixology techniques.",
-        "Handcrafted drinks honor both tradition and creativity.",
-        "Every cocktail blends science, art, and passion.",
-        "Creative recipes are shared around the globe.",
-        "Presentation and flavor go hand in hand.",
-        "Customizable drinks let guests choose their adventure.",
-        "Signature cocktails set the tone for celebrations.",
-        "Intricate ice cubes add an elegant touch.",
-        "Each cocktail celebrates its unique ingredients.",
-        "Exploring new flavor combinations is part of the fun.",
-        "Personal style sets the best bartenders apart.",
-        "Every drink is crafted with care and precision.",
-        "Seasonal recipes keep cocktail menus fresh.",
-        "Innovative pairings are transforming menus.",
-        "Unique bar setups create immersive experiences.",
-        "Mixology is an ever-evolving art form.",
-        "Each cocktail reflects a blend of culture and creativity.",
-        "Fresh, high-quality ingredients are essential.",
-        "Sustainability shapes modern mixology.",
-        "Garnishes can be edible art.",
-        "Artisan cocktails capture the essence of their components.",
-        "Visual appeal and taste make cocktails memorable.",
-        "Mixology is about creating moments of joy.",
-        "Precision and creativity unite behind every bar.",
-        "Bartenders are the unsung heroes of great nights.",
-        "Every cocktail pays tribute to innovation.",
-        "Classic techniques blend with modern trends.",
-        "The cocktail experience is both ritual and art.",
-        "Mixologists push flavor boundaries.",
-        "Great cocktails bring people together.",
-        "Personalized drinks reflect the creator’s vision.",
-        "Innovative presentations are a feast for the eyes.",
-        "Each cocktail is a journey of taste and aroma.",
-        "Artisanal techniques highlight the beauty of simplicity.",
-        "Heritage and innovation coexist in modern mixology.",
-        "Excellence is poured into every cocktail.",
-        "Sharing the creative process adds to the experience.",
-        "Community, creativity, and quality define cocktail culture.",
-        "Every sip is a delightful surprise.",
-        "Global trends inspire fresh cocktail ideas.",
-        "Fresh herbs and fruits elevate every drink.",
-        "Balance in flavor and style creates the perfect cocktail.",
-        "Dedication and passion are the spirits behind every drink.",
-        "A cocktail is an invitation to celebrate life."
+        "Connecticut is known for its vibrant party scene in New Haven!",
+        "Hartford has a rich history of speakeasies and underground bars.",
+        "Mystic, CT boasts maritime charm and innovative cocktail culture.",
+        "Connecticut hosts some of the most unique weddings in the Northeast.",
+        "Every cocktail in CT tells a story of tradition and innovation.",
+        "New London is a hotspot for creative mixologists.",
+        "The scenic beauty of CT makes outdoor parties unforgettable.",
+        "CT's craft cocktail scene is booming with local distilleries.",
+        "From CT beaches to elegant ballrooms, celebrations here shine.",
+        "Festivals in Connecticut celebrate food, drink, and local art.",
+        "Connecticut’s seasonal events are perfect for cocktail enthusiasts.",
+        "Many CT bars offer locally sourced ingredients in their drinks.",
+        "Historic taverns in CT provide a cozy party atmosphere.",
+        "CT’s mixology scene blends tradition with modern flair.",
+        "The state's diverse venues make every event special.",
+        "Connecticut is home to innovative craft cocktail competitions.",
+        "CT breweries and distilleries collaborate on unique flavors.",
+        "Outdoor gatherings in CT are enhanced by its scenic views.",
+        "CT hosts festivals celebrating everything from food to fine wine.",
+        "Local chefs and bartenders in CT create unforgettable pairings.",
+        "Connecticut nightlife is as diverse as its communities.",
+        "Many CT events feature live music and creative cocktails.",
+        "CT's coastal towns are renowned for seaside celebrations.",
+        "Local art and design influence CT’s trendy bar scenes.",
+        "CT’s mixologists are pioneers in sustainable cocktail practices.",
+        "The state’s historic inns host charming cocktail evenings.",
+        "Connecticut offers a blend of urban chic and rustic charm in events.",
+        "CT’s cocktail menus often reflect the state’s cultural diversity.",
+        "Innovative cocktail presentations are a CT specialty.",
+        "CT events combine tradition, elegance, and a dash of rebellion.",
+        "Party-goers in CT enjoy both vintage and modern vibes.",
+        "Connecticut is home to some of the country’s most creative bartenders.",
+        "CT’s culinary scene perfectly complements its cocktail culture.",
+        "Outdoor patios in CT provide a relaxed party ambiance.",
+        "Many CT bars double as art galleries, enhancing the party scene.",
+        "Connecticut’s scenic vistas set the perfect backdrop for celebrations.",
+        "CT's wine bars offer a sophisticated twist on classic cocktails.",
+        "The state is famous for hosting extravagant garden parties.",
+        "CT’s local breweries often collaborate with mixologists for special events.",
+        "Charming CT towns are ideal for intimate gatherings and celebrations.",
+        "Many CT venues boast rooftop bars with stunning views.",
+        "CT’s cocktail culture is enriched by its maritime history.",
+        "Festive events in CT often feature creative themed cocktails.",
+        "Connecticut’s historic districts provide a unique party atmosphere.",
+        "CT is a blend of modern energy and storied tradition in celebrations.",
+        "Local mixologists in CT are known for their innovative infusions.",
+        "Connecticut’s events celebrate both luxury and local charm.",
+        "CT’s food and drink festivals attract visitors from all over.",
+        "Many CT venues have transformed old warehouses into chic party spots.",
+        "The party scene in CT is as warm as its autumn hues.",
+        "Connecticut’s cocktail culture is celebrated at local fairs and festivals.",
+        "CT bars often host events that feature local live music.",
+        "Connecticut is home to award-winning craft cocktail bars.",
+        "Local legends and folklore add magic to CT parties.",
+        "CT’s vibrant street festivals bring communities together over drinks.",
+        "Many CT events are themed around the state’s rich maritime heritage.",
+        "Connecticut’s creative cocktail competitions are a local favorite.",
+        "CT’s bars are known for their signature, Instagram-worthy drinks.",
+        "The mix of urban and rural settings makes CT events unique.",
+        "Connecticut offers a fusion of international flavors in its cocktails.",
+        "CT’s historical landmarks often serve as dramatic party venues.",
+        "Many CT bartenders are true artists in their craft.",
+        "CT’s festive celebrations are full of energy and creativity.",
+        "Local farms in CT supply fresh ingredients for seasonal cocktails.",
+        "CT’s cocktail bars often feature live art and music performances.",
+        "The spirit of Connecticut is celebrated in its diverse party scenes.",
+        "CT’s old inns and modern lounges blend seamlessly for events.",
+        "Connecticut’s mixology innovation is recognized nationwide.",
+        "CT is known for its cozy, intimate bar settings.",
+        "Many CT parties are inspired by the state’s rich colonial history.",
+        "CT’s outdoor events are popular in every season.",
+        "Connecticut’s urban bars are hubs for creative networking events.",
+        "CT festivals highlight the best of local food, drink, and music.",
+        "Connecticut offers a perfect mix of elegance and down-to-earth fun.",
+        "The cocktail culture in CT is rooted in local traditions.",
+        "CT venues often mix vintage decor with modern cocktails.",
+        "Many CT events celebrate the local arts and crafts scene.",
+        "Connecticut’s bar scene is as diverse as its people.",
+        "CT parties often feature interactive cocktail-making demos.",
+        "The charm of Connecticut enhances every celebration.",
+        "CT’s vibrant nightlife is full of hidden gem bars.",
+        "Many CT bartenders are innovators in molecular mixology.",
+        "CT hosts events that celebrate both tradition and innovation.",
+        "Connecticut’s coastal towns are famous for lively beach parties.",
+        "CT’s cocktail events often feature guest appearances by top mixologists.",
+        "The creative energy in CT is reflected in its drink menus.",
+        "CT’s historic venues provide a dramatic backdrop for events.",
+        "Connecticut is a playground for those who love fine cocktails.",
+        "CT’s parties often blend gourmet food with handcrafted drinks.",
+        "Many CT events are set in beautifully restored historic buildings.",
+        "The scenic beauty of CT makes every celebration picture-perfect.",
+        "Connecticut’s vibrant party scene is fueled by creative energy.",
+        "CT bars are known for their imaginative cocktail garnishes.",
+        "Local festivals in CT are a showcase of food, art, and drink.",
+        "CT’s cocktail culture continues to evolve with fresh ideas.",
+        "Connecticut is a treasure trove of hidden cocktail bars.",
+        "The state’s unique venues make CT events memorable.",
+        "CT parties often celebrate the joy of community and creativity.",
+        "Connecticut’s nightlife is as dynamic as its daytime charm.",
+        "Many CT cocktail bars have a story behind every drink.",
+        "CT’s festive gatherings are celebrated with style and flair.",
+        "Connecticut offers endless inspiration for party planners.",
+        "CT’s mixology scene is a blend of art, science, and passion.",
+        "The magic of CT is captured in every cocktail served.",
+        "Connecticut is home to some of the most innovative party concepts."
       ];
       
       function updateFunFact() {
