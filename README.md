@@ -444,10 +444,8 @@
         <div class="booking-calendar">
           <!-- Booking Form Column -->
           <div class="booking-form">
-            <!-- Note: Replace the action URL below with your form service endpoint 
-                 so that submissions are routed to raiseaglassservices@gmail.com -->
-            <form class="info-form" id="bookingForm" action="https://formspree.io/f/YOUR_BOOKING_FORM_ID" method="POST">
-              <input type="hidden" name="_subject" value="New Booking Request">
+            <!-- When the user submits this form, the JavaScript will compile a mailto link -->
+            <form class="info-form" id="bookingForm" onsubmit="submitBookingForm(); return false;">
               <label for="name">Your Name</label>
               <input type="text" name="name" id="name" placeholder="Your awesome name" required>
               
@@ -497,14 +495,12 @@
       </div>
     </section>
     
-    <!-- QUOTE GENERATOR SECTION (Existing Section) -->
+    <!-- QUOTE GENERATOR SECTION -->
     <section class="info-section" id="quote">
       <div class="container">
         <h2>Quote Generator</h2>
-        <!-- Note: Replace the action URL below with your form service endpoint 
-             so that submissions are routed to raiseaglassservices@gmail.com -->
-        <form class="info-form" id="quoteForm" action="https://formspree.io/f/YOUR_QUOTE_FORM_ID" method="POST">
-          <input type="hidden" name="_subject" value="New Quote Request">
+        <!-- When the user submits this form, the JavaScript will compile a mailto link -->
+        <form class="info-form" id="quoteForm" onsubmit="submitQuoteForm(); return false;">
           <label for="qName">Your Name</label>
           <input type="text" id="qName" name="qName" placeholder="Your Name" required>
           
@@ -612,6 +608,58 @@
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
+    // Function to compile booking form data into a mailto link
+    function submitBookingForm() {
+      var name = document.getElementById('name').value;
+      var email = document.getElementById('email').value;
+      var phone = document.getElementById('phone').value;
+      var address = document.getElementById('address').value;
+      var eventDate = document.getElementById('eventDate').value;
+      var headcount = document.getElementById('headcount').value;
+      var eventType = document.getElementById('eventType').value;
+      var location = document.getElementById('location').value;
+      var barService = document.getElementById('barService').value;
+      var comments = document.getElementById('comments').value;
+      
+      var subject = encodeURIComponent("New Booking Request from " + name);
+      var body = encodeURIComponent(
+        "Name: " + name + "\n" +
+        "Email: " + email + "\n" +
+        "Phone: " + phone + "\n" +
+        "Address: " + address + "\n" +
+        "Event Date: " + eventDate + "\n" +
+        "Guest Count: " + headcount + "\n" +
+        "Event Type: " + eventType + "\n" +
+        "Location: " + location + "\n" +
+        "Mobile Bar: " + barService + "\n" +
+        "Additional Comments: " + comments
+      );
+      
+      window.location.href = "mailto:raiseaglassservices@gmail.com?subject=" + subject + "&body=" + body;
+    }
+    
+    // Function to compile quote form data into a mailto link
+    function submitQuoteForm() {
+      var qName = document.getElementById('qName').value;
+      var qEmail = document.getElementById('qEmail').value;
+      var qHeadcount = document.getElementById('qHeadcount').value;
+      var qEventType = document.getElementById('qEventType').value;
+      var qBarService = document.getElementById('qBarService').value;
+      var calculatedQuote = document.getElementById('calculatedQuote').value;
+      
+      var subject = encodeURIComponent("New Quote Request from " + qName);
+      var body = encodeURIComponent(
+        "Name: " + qName + "\n" +
+        "Email: " + qEmail + "\n" +
+        "Number of Guests: " + qHeadcount + "\n" +
+        "Event Type: " + qEventType + "\n" +
+        "Mobile Bar: " + qBarService + "\n" +
+        "Estimated Quote: $" + calculatedQuote
+      );
+      
+      window.location.href = "mailto:raiseaglassservices@gmail.com?subject=" + subject + "&body=" + body;
+    }
+    
     $(document).ready(function(){
       // Initialize datepickers
       $("#eventDate").datepicker({ minDate: 0, dateFormat: "mm/dd/yy" });
