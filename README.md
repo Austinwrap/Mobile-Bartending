@@ -181,7 +181,7 @@
       color: #ffffff;
     }
     
-    /* NEW SECTIONS: ABOUT, BOOKING/INFO, QUOTE, CALENDAR, CONTACT */
+    /* INFO SECTIONS */
     .info-section {
       padding: 80px 0;
       background: rgba(255,245,238,0.95);
@@ -233,7 +233,7 @@
       margin-top: 20px;
     }
     
-    /* ABOUT SECTION (Written by Raeanne) */
+    /* ABOUT SECTION */
     .about-section {
       padding: 80px 0;
       background: rgba(255,245,238,0.98);
@@ -310,7 +310,7 @@
       <div class="container">
         <h2>About Raeanne</h2>
         <p>
-          Hi, I'm Raeanne! With over 7 years of bartending experience, I blend creativity and passion to bring unforgettable experiences to every event. I love turning gatherings into celebrations—cheers to great times and even greater drinks!
+Hey, I’m Rae! 🍸 With over 7 years of bartending experience, I bring a fun, professional touch to every event. Whether it’s a wedding, private party, or corporate gathering, I’ll craft the perfect drinks to match the vibe. Let’s make your event unforgettable—contact me for a free quote! 🍾✨
         </p>
       </div>
     </section>
@@ -341,13 +341,11 @@
       </div>
     </section>
     
-    <!-- BOOKING / INFORMATION SHEET SECTION -->
+    <!-- BOOKING SECTION -->
     <section class="info-section" id="booking">
       <div class="container">
         <h2>Book Your Event</h2>
-        <?php 
-          if (!empty($booking_message)) { 
-              echo '<p style="text-align:center; font-size:1.2em; color:#3d405b;">
+        
         <form class="info-form" id="bookingForm" action="" method="POST">
           <label for="name">Your Name</label>
           <input type="text" name="name" id="name" placeholder="Your awesome name" required>
@@ -395,26 +393,39 @@
     <section class="info-section" id="quote">
       <div class="container">
         <h2>Quote Generator</h2>
-        <form class="info-form" id="quoteForm">
+       
+        <form class="info-form" id="quoteForm" method="POST" action="">
+          <label for="qName">Your Name</label>
+          <input type="text" id="qName" name="qName" placeholder="Your Name" required>
+          
+          <label for="qEmail">Your Email</label>
+          <input type="email" id="qEmail" name="qEmail" placeholder="you@example.com" required>
+
           <label for="qHeadcount">Number of Guests</label>
-          <input type="number" id="qHeadcount" placeholder="Enter guest count" required>
+          <input type="number" id="qHeadcount" name="qHeadcount" placeholder="Enter guest count" required>
           
           <label for="qEventType">Event Type</label>
-          <select id="qEventType" required>
+          <select id="qEventType" name="qEventType" required>
             <option value="backyard">Backyard Party</option>
             <option value="wedding">Wedding</option>
             <option value="other">Other</option>
           </select>
           
           <label for="qBarService">Need a Mobile Bar?</label>
-          <select id="qBarService" required>
+          <select id="qBarService" name="qBarService" required>
             <option value="yes">Yes</option>
             <option value="no">No</option>
           </select>
           
           <button type="button" id="calculateQuote">Calculate Quote</button>
+          
+          <div id="quoteResult" style="margin-top:20px;"></div>
+          
+          <!-- Hidden field to store calculated quote -->
+          <input type="hidden" id="calculatedQuote" name="calculatedQuote" value="">
+
+          <button type="submit" name="submit_quote">Send Quote Request</button>
         </form>
-        <div id="quoteResult"></div>
       </div>
     </section>
     
@@ -450,7 +461,7 @@
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
     $(document).ready(function(){
-      // Initialize datepicker for booking form and calendar
+      // Initialize datepickers
       $("#eventDate").datepicker({ minDate: 0, dateFormat: "mm/dd/yy" });
       $("#datepicker").datepicker({
         minDate: 0,
@@ -459,25 +470,31 @@
         }
       });
       
-      // Quote generator logic
+      // Quote generator logic: Calculate and store the quote value
       $("#calculateQuote").click(function(){
         var headcount = parseInt($("#qHeadcount").val());
         var eventType = $("#qEventType").val();
         var barService = $("#qBarService").val();
         
-        if(isNaN(headcount) || headcount <= 0) {
+        if (isNaN(headcount) || headcount <= 0) {
           $("#quoteResult").html("Please enter a valid number of guests.");
           return;
         }
         
         var basePrice = 200, pricePerGuest = 10;
-        if(eventType === "wedding") { basePrice = 500; pricePerGuest = 20; }
+        if (eventType === "wedding") { 
+          basePrice = 500; 
+          pricePerGuest = 20; 
+        }
         var total = basePrice + (headcount * pricePerGuest);
-        if(barService === "yes") { total += 150; }
+        if (barService === "yes") { 
+          total += 150; 
+        }
         $("#quoteResult").html("Estimated Quote: $" + total);
+        $("#calculatedQuote").val(total); // Store the calculated quote in the hidden input
       });
       
-      // Fun Fact Ticker: Array of updated bartending facts
+      // Fun Fact Ticker
       var facts = [
         "Mixology blends art and science in every cocktail.",
         "Modern bartenders combine tradition with innovation.",
