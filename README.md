@@ -521,7 +521,7 @@
         <a href="#booking">Book Your Event</a>
         <a href="#quote">Quote Generator</a>
         <div class="casino-dropdown">
-            <a href="#" class="casino-link">Rae's Casino</a>
+            <a href="#" class="casino-link" onclick="$('#slotMachinePopup').show(); return false;">Rae's Casino</a>
             <div class="casino-dropdown-content">
                 <a href="#slots" id="slotNavLink">Slots</a>
                 <a href="#blackjack" id="blackjackNavLink">Blackjack</a>
