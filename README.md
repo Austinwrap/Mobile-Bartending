@@ -1,8 +1,10 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Raise A Glass LLC - Event Bartending</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <title>Raise A Glass LLC - Event Bartending & Casino</title>
   <!-- Google Fonts -->
   <link href="https://fonts.googleapis.com/css2?family=Dancing+Script&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet" />
   <!-- Font Awesome Icons -->
@@ -19,6 +21,9 @@
       background-attachment: fixed;
       color: #333;
       position: relative;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -webkit-overflow-scrolling: touch;
     }
     h1 {
       font-family: 'Dancing Script', cursive;
@@ -27,6 +32,7 @@
       text-align: center;
       margin-bottom: 10px;
       text-shadow: 3px 3px 8px rgba(0,0,0,0.5);
+      position: relative;
     }
     h2 { color: #3d405b; font-size: 2.5em; margin-bottom: 20px; text-align: center; }
     
@@ -42,9 +48,10 @@
       padding: 10px;
       text-align: center;
       z-index: 10000;
+      transition: transform 0.3s ease;
     }
     
-    /* BUBBLES BACKGROUND */
+    /* BUBBLES & FIZZ */
     .bubbles {
       position: fixed;
       top: 0;
@@ -52,21 +59,47 @@
       width: 100%;
       height: 100%;
       pointer-events: none;
+      z-index: 5;
       overflow: hidden;
-      z-index: -1;
     }
     .bubble {
       position: absolute;
-      bottom: -100px;
-      background: rgba(255,255,255,0.5);
+      background: rgba(255,255,255,0.8);
       border-radius: 50%;
-      opacity: 0.7;
-      animation: rise 10s infinite ease-in;
+      opacity: 0;
+      animation: riseAndFizz 6s infinite ease-out;
     }
-    @keyframes rise {
-      0% { transform: translateY(0) scale(0.5); opacity: 0.7; }
-      50% { opacity: 0.9; }
-      100% { transform: translateY(-110vh) scale(1); opacity: 0; }
+    .bubble.suds {
+      background: radial-gradient(circle, rgba(255,255,255,0.9), rgba(255,255,255,0));
+      animation: sudsPop 4s infinite ease-out;
+    }
+    @keyframes riseAndFizz {
+      0% { transform: translateY(100vh) scale(0.3); opacity: 0.8; }
+      50% { transform: translateY(50vh) scale(0.8) translateX(10px); opacity: 1; }
+      100% { transform: translateY(-20vh) scale(1); opacity: 0; }
+    }
+    @keyframes sudsPop {
+      0% { transform: translateY(100vh) scale(0.5); opacity: 0.9; }
+      70% { transform: translateY(30vh) scale(1.2); opacity: 1; }
+      100% { transform: translateY(0) scale(0.8); opacity: 0; }
+    }
+    
+    /* CUSTOM CHAMPAGNE GLASSES */
+    .champagne-glasses {
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      width: 50px;
+      height: 50px;
+      z-index: 10;
+      animation: clinkAndFizz 3s infinite ease-in-out;
+    }
+    @keyframes clinkAndFizz {
+      0% { transform: translateX(0) rotate(0deg); }
+      25% { transform: translateX(-10px) rotate(10deg); }
+      50% { transform: translateX(0) rotate(0deg); }
+      75% { transform: translateX(5px) rotate(-5deg); }
+      100% { transform: translateX(0) rotate(0deg); }
     }
     
     /* HEADER */
@@ -84,18 +117,71 @@
     .main-nav {
       background-color: #e07a5f;
       text-align: center;
-      padding: 10px 0;
+      padding: 15px 0;
       margin-top: 20px;
       z-index: 1000;
+      position: sticky;
+      top: 0;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.2);
     }
     .main-nav a {
       color: #fff;
       text-decoration: none;
-      margin: 0 15px;
-      font-size: 1.1em;
-      transition: color 0.3s;
+      margin: 0 20px;
+      font-size: 1.2em;
+      transition: color 0.3s, transform 0.2s;
+      display: inline-block;
     }
-    .main-nav a:hover { color: #ffddd2; }
+    .main-nav a:hover { color: #ffddd2; transform: scale(1.1); }
+    
+    /* Glamorous Rae's Casino Link */
+    .casino-link {
+      position: relative;
+      font-family: 'Dancing Script', cursive;
+      font-size: 1.4em;
+      color: #ffd700; /* Gold */
+      text-shadow: 0 0 5px #ffd700, 0 0 10px #ff4500;
+      padding: 5px 15px;
+      border: 2px solid #ffd700;
+      border-radius: 8px;
+      animation: casinoGlow 2s infinite alternate;
+    }
+    @keyframes casinoGlow {
+      0% { box-shadow: 0 0 5px #ffd700; }
+      100% { box-shadow: 0 0 15px #ff4500; }
+    }
+    
+    /* Casino Dropdown */
+    .casino-dropdown {
+      position: relative;
+      display: inline-block;
+    }
+    .casino-dropdown-content {
+      display: none;
+      position: absolute;
+      background-color: #3d405b;
+      min-width: 160px;
+      box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+      z-index: 1;
+      border-radius: 5px;
+      top: 100%;
+      left: 50%;
+      transform: translateX(-50%);
+    }
+    .casino-dropdown-content a {
+      color: #fff;
+      padding: 12px 16px;
+      text-decoration: none;
+      display: block;
+      font-family: 'Montserrat', sans-serif;
+      font-size: 1em;
+      margin: 0;
+    }
+    .casino-dropdown-content a:hover {
+      background-color: #e07a5f;
+      color: #ffd700;
+    }
+    .casino-dropdown:hover .casino-dropdown-content { display: block; }
     
     /* COLUMNS (Old Mansion Vibe) */
     .columns {
@@ -128,8 +214,9 @@
       margin: 40px 0;
       box-shadow: 8px 8px 20px rgba(0,0,0,0.3);
       border-radius: 25px;
+      position: relative;
     }
-    .container { width: 80%; margin: 0 auto; }
+    .container { width: 80%; margin: 0 auto; max-width: 1200px; }
     ul { list-style-type: none; margin: 40px 0; padding: 0; }
     ul li {
       font-size: 1.4em;
@@ -138,24 +225,48 @@
       background: rgba(255,255,255,0.9);
       border-radius: 15px;
       box-shadow: 4px 4px 15px rgba(0,0,0,0.2);
+      transition: transform 0.3s;
     }
+    ul li:hover { transform: translateY(-5px); }
     
-    /* BUTTONS */
+    /* BUTTONS WITH FIZZ */
     .btn {
       display: inline-block;
       background: linear-gradient(to right, #e07a5f, #3d405b);
       color: #fff;
       padding: 15px 30px;
       text-decoration: none;
-      margin-top: 30px;
+      margin: 10px;
       border-radius: 12px;
       box-shadow: 5px 5px 15px rgba(0,0,0,0.3);
-      transition: background 0.3s, box-shadow 0.3s;
+      transition: background 0.3s, box-shadow 0.3s, transform 0.2s;
       font-size: 1.2em;
+      touch-action: manipulation;
+      position: relative;
+      overflow: hidden;
     }
     .btn:hover {
       background: linear-gradient(to right, #3d405b, #e07a5f);
       box-shadow: 7px 7px 20px rgba(0,0,0,0.4);
+      transform: scale(1.05);
+    }
+    .btn::after {
+      content: "";
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background: rgba(255,255,255,0.5);
+      border-radius: 50%;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      animation: fizzBurst 1s infinite;
+      opacity: 0;
+    }
+    .btn:hover::after { animation-play-state: running; opacity: 1; }
+    @keyframes fizzBurst {
+      0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+      100% { transform: translate(-50%, -50%) scale(2); opacity: 0; }
     }
     
     /* FOOTER */
@@ -198,16 +309,25 @@
       font-size: 1em;
       display: block;
       margin-bottom: 5px;
+      color: #3d405b;
     }
     .info-form input,
     .info-form select,
     .info-form textarea {
       width: 100%;
-      padding: 10px;
+      padding: 12px;
       margin-bottom: 15px;
       border-radius: 10px;
       border: 1px solid #ccc;
       font-size: 1em;
+      font-family: 'Montserrat', sans-serif;
+      transition: border-color 0.3s;
+    }
+    .info-form input:focus,
+    .info-form select:focus,
+    .info-form textarea:focus {
+      border-color: #e07a5f;
+      outline: none;
     }
     .info-form button {
       display: block;
@@ -219,10 +339,11 @@
       font-size: 1.2em;
       border-radius: 12px;
       cursor: pointer;
-      transition: background 0.3s;
+      transition: background 0.3s, transform 0.2s;
     }
     .info-form button:hover {
       background: linear-gradient(to right, #3d405b, #e07a5f);
+      transform: scale(1.02);
     }
     #quoteResult {
       font-size: 1.5em;
@@ -249,15 +370,33 @@
       color: #3d405b;
     }
     
-    /* RESPONSIVE */
+    /* RESPONSIVE DESIGN */
     @media (max-width: 768px) {
       .container { width: 90%; }
-      .main-nav { position: relative; top: 0; width: 100%; padding: 10px 0; }
-      .main-nav a { margin: 5px; font-size: 1em; }
+      .main-nav { padding: 10px 0; }
+      .main-nav a { margin: 8px; font-size: 1em; display: block; }
+      .casino-link { font-size: 1.2em; padding: 3px 10px; }
+      .casino-dropdown-content { position: static; transform: none; width: 100%; }
       .columns { display: none; }
       .btn { padding: 12px 25px; font-size: 1em; }
       .booking-calendar { flex-direction: column; }
       .booking-calendar > div { width: 100%; margin-bottom: 20px; }
+      h1 { font-size: 2.5em; }
+      h2 { font-size: 2em; }
+      .header { padding: 40px 0; }
+      .info-form input,
+      .info-form select,
+      .info-form textarea { font-size: 1em; padding: 10px; }
+      .champagne-glasses { width: 40px; height: 40px; }
+    }
+    @media only screen and (max-width: 414px) and (-webkit-min-device-pixel-ratio: 2) {
+      body { padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom); }
+      .main-nav { padding: 8px 0; }
+      .main-nav a { font-size: 0.9em; margin: 6px; }
+      .casino-link { font-size: 1.1em; }
+      .btn { padding: 10px 20px; font-size: 0.9em; }
+      #fun-fact-box { font-size: 0.85em; padding: 8px; }
+      .champagne-glasses { width: 30px; height: 30px; right: 10px; }
     }
     
     /* Booking & Calendar Combined */
@@ -267,19 +406,31 @@
       align-items: flex-start;
       gap: 20px;
     }
-    .booking-calendar .booking-form {
-      flex: 1;
+    .booking-calendar .booking-form { flex: 1; }
+    .booking-calendar .calendar-container { flex: 1; max-width: 350px; }
+    .availability-status { margin-top: 10px; font-size: 1.1em; color: #3d405b; }
+    
+    /* Sticky Book Raeanne Button */
+    .sticky-book-btn {
+      position: fixed;
+      bottom: 20px;
+      left: 20px;
+      background: #e07a5f;
+      color: #fff;
+      padding: 12px 25px;
+      border-radius: 50px;
+      text-decoration: none;
+      font-size: 1.1em;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+      z-index: 10001;
+      transition: transform 0.3s;
     }
-    .booking-calendar .calendar-container {
-      flex: 1;
-      max-width: 350px;
-    }
+    .sticky-book-btn:hover { transform: scale(1.1); background: #3d405b; }
     
     /* Floating Buttons for Pop-Ups */
     .floating-btn {
       position: fixed;
       bottom: 20px;
-      right: 20px;
       margin: 5px;
       background: #3d405b;
       color: #fff;
@@ -289,8 +440,14 @@
       cursor: pointer;
       z-index: 10001;
       box-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+      font-size: 1em;
+      transition: background 0.3s, transform 0.2s;
     }
-    .floating-btn:hover { background: #e07a5f; }
+    .floating-btn:hover { background: #e07a5f; transform: scale(1.05); }
+    #openQuotePopup { right: 20px; padding: 12px 20px; font-size: 1.1em; }
+    #openSlotMachine { right: 150px; }
+    #openBlackjack { right: 260px; }
+    #openRocket { right: 370px; }
     
     /* Pop-Up Windows */
     .popup {
@@ -302,6 +459,7 @@
       border-radius: 10px;
       z-index: 10000;
       box-shadow: 5px 5px 20px rgba(0,0,0,0.5);
+      max-width: 90%;
     }
     .popup-header {
       background: #3d405b;
@@ -323,64 +481,131 @@
       cursor: pointer;
       margin-left: 5px;
     }
-    .popup-content {
-      padding: 10px;
-    }
+    .popup-content { padding: 15px; }
     .popup .hidden { display: none; }
     
-    /* Custom Styles for Pop-Ups */
-    /* Quick Quote Pop-Up: Bigger & Different Color */
-    #quotePopup {
-      width: 350px;
-      background: #fef9e7;
-      border-color: #d4ac0d;
-    }
-    /* Slot Machine Pop-Up: Cuter with Pastel/Neon Accents */
+    /* Slot Machine Popup */
     #slotMachinePopup {
-      width: 350px;
+      width: 400px;
       background: #e8f8f5;
       border-color: #16a085;
     }
-    /* Neon Effect for Slot Machine Display */
-    .neon {
+    #slotDisplay {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
       font-size: 3em;
-      padding: 10px;
-      border: 3px solid #0ff;
-      border-radius: 8px;
-      text-align: center;
-      animation: neonGlow 1.5s ease-in-out infinite alternate;
-      margin-bottom: 10px;
+      margin: 20px 0;
     }
-    @keyframes neonGlow {
-      from { box-shadow: 0 0 10px #0ff, 0 0 20px #0ff, 0 0 30px #0ff; }
-      to { box-shadow: 0 0 20px #0ff, 0 0 30px #0ff, 0 0 40px #0ff; }
+    .slot-reel {
+      width: 60px;
+      height: 60px;
+      text-align: center;
+      line-height: 60px;
+      background: rgba(255,255,255,0.8);
+      border-radius: 8px;
+      overflow: hidden;
+    }
+    .slot-reel.spinning { animation: spinReel 0.5s linear infinite; }
+    @keyframes spinReel {
+      0% { transform: translateY(-100%); }
+      100% { transform: translateY(100%); }
+    }
+    #slotBetInput {
+      margin: 10px 0;
+      padding: 8px;
+      font-size: 1em;
+      border-radius: 5px;
+      width: 100px;
     }
     
+    /* Blackjack Popup */
+    #blackjackPopup {
+      width: 500px;
+      background: #fef9e7;
+      border-color: #d4ac0d;
+    }
+    #blackjackHands {
+      display: flex;
+      justify-content: space-between;
+      margin: 20px 0;
+    }
+    .hand {
+      width: 45%;
+      padding: 10px;
+      background: rgba(255,255,255,0.8);
+      border-radius: 8px;
+    }
+    #blackjackResult { margin-top: 10px; font-weight: bold; }
+    
+    /* Rocket Game Popup */
+    #rocketPopup {
+      width: 400px;
+      background: #e8f8f5;
+      border-color: #16a085;
+    }
+    #rocketDisplay {
+      font-size: 2em;
+      text-align: center;
+      margin: 20px 0;
+      color: #3d405b;
+    }
+    #rocketMultiplier {
+      font-size: 3em;
+      color: #e07a5f;
+    }
+    #rocketResult { margin-top: 10px; font-weight: bold; }
+    
+    /* Shared Casino Styles */
+    .casino-btn {
+      padding: 8px 15px;
+      margin: 5px;
+      background: #16a085;
+      border: none;
+      color: #fff;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .casino-btn:hover { background: #e07a5f; }
+    .casino-input {
+      padding: 8px;
+      margin: 5px;
+      border-radius: 5px;
+      font-size: 1em;
+    }
   </style>
 </head>
 <body>
   <!-- Fun Fact Ticker -->
   <div id="fun-fact-box">Did you know? Loading fun facts...</div>
   
-  <!-- Bubbles Background -->
+  <!-- Bubbles & Fizz -->
   <div class="bubbles">
-    <div class="bubble" style="left: 10%; width: 40px; height: 40px; animation-delay: 0s;"></div>
-    <div class="bubble" style="left: 20%; width: 30px; height: 30px; animation-delay: 2s;"></div>
-    <div class="bubble" style="left: 35%; width: 50px; height: 50px; animation-delay: 4s;"></div>
-    <div class="bubble" style="left: 50%; width: 20px; height: 20px; animation-delay: 1s;"></div>
-    <div class="bubble" style="left: 65%; width: 45px; height: 45px; animation-delay: 3s;"></div>
-    <div class="bubble" style="left: 80%; width: 35px; height: 35px; animation-delay: 5s;"></div>
-    <div class="bubble" style="left: 90%; width: 25px; height: 25px; animation-delay: 7s;"></div>
-    <div class="bubble" style="left: 15%; width: 30px; height: 30px; animation-delay: 6s;"></div>
-    <div class="bubble" style="left: 40%; width: 40px; height: 40px; animation-delay: 8s;"></div>
-    <div class="bubble" style="left: 75%; width: 50px; height: 50px; animation-delay: 4s;"></div>
+    <div class="bubble" style="left: 5%; width: 20px; height: 20px; animation-delay: 0s;"></div>
+    <div class="bubble suds" style="left: 15%; width: 30px; height: 30px; animation-delay: 1s;"></div>
+    <div class="bubble" style="left: 25%; width: 25px; height: 25px; animation-delay: 2s;"></div>
+    <div class="bubble suds" style="left: 35%; width: 35px; height: 35px; animation-delay: 3s;"></div>
+    <div class="bubble" style="left: 45%; width: 15px; height: 15px; animation-delay: 4s;"></div>
+    <div class="bubble suds" style="left: 55%; width: 40px; height: 40px; animation-delay: 5s;"></div>
+    <div class="bubble" style="left: 65%; width: 20px; height: 20px; animation-delay: 6s;"></div>
+    <div class="bubble suds" style="left: 75%; width: 30px; height: 30px; animation-delay: 7s;"></div>
+    <div class="bubble" style="left: 85%; width: 25px; height: 25px; animation-delay: 8s;"></div>
+    <div class="bubble suds" style="left: 95%; width: 35px; height: 35px; animation-delay: 9s;"></div>
   </div>
   
   <!-- HEADER -->
   <header class="header" id="home">
     <div class="container">
-      <h1>Raise A Glass LLC</h1>
-      <p class="tagline">Mobile Bartending Services for All Occasions</p>
+      <h1>Raise A Glass LLC 
+        <svg class="champagne-glasses" viewBox="0 0 50 50" fill="none" stroke="#f4f1de" stroke-width="2">
+          <path d="M15 10 L15 30 Q15 35 20 35 L25 35" />
+          <path d="M35 10 L35 30 Q35 35 30 35 L25 35" />
+          <path d="M25 35 L25 45" />
+          <circle cx="25" cy="45" r="5" />
+        </svg>
+      </h1>
+      <p class="tagline">Mobile Bartending Services & Casino Fun</p>
     </div>
   </header>
   
@@ -392,6 +617,14 @@
     <a href="#packages">Packages</a>
     <a href="#booking">Book Your Event</a>
     <a href="#quote">Quote Generator</a>
+    <div class="casino-dropdown">
+      <a href="#" class="casino-link">Rae's Casino</a>
+      <div class="casino-dropdown-content">
+        <a href="#slots" id="slotNavLink">Slots</a>
+        <a href="#blackjack" id="blackjackNavLink">Blackjack</a>
+        <a href="#rocket" id="rocketNavLink">Rocket Game</a>
+      </div>
+    </div>
     <a href="#contact">Contact Us</a>
   </nav>
   
@@ -404,7 +637,14 @@
     <!-- ABOUT SECTION -->
     <section class="about-section" id="about">
       <div class="container">
-        <h2>About Raeanne</h2>
+        <h2>About Raeanne 
+          <svg class="champagne-glasses" style="width: 40px; height: 40px;" viewBox="0 0 50 50" fill="none" stroke="#3d405b" stroke-width="2">
+            <path d="M15 10 L15 30 Q15 35 20 35 L25 35" />
+            <path d="M35 10 L35 30 Q35 35 30 35 L25 35" />
+            <path d="M25 35 L25 45" />
+            <circle cx="25" cy="45" r="5" />
+          </svg>
+        </h2>
         <p>
           Hi, I'm Raeanne! With over 7 years of bartending experience, I blend creativity and passion to bring unforgettable experiences to every event. I love turning gatherings into celebrations—cheers to great times and even greater drinks!
         </p>
@@ -442,54 +682,42 @@
       <div class="container">
         <h2>Book Your Event</h2>
         <div class="booking-calendar">
-          <!-- Booking Form Column -->
           <div class="booking-form">
-            <!-- When the user submits this form, the JavaScript will compile a mailto link -->
             <form class="info-form" id="bookingForm" onsubmit="submitBookingForm(); return false;">
               <label for="name">Your Name</label>
               <input type="text" name="name" id="name" placeholder="Your awesome name" required>
-              
               <label for="email">Your Email</label>
               <input type="email" name="email" id="email" placeholder="you@example.com" required>
-              
               <label for="phone">Your Phone Number</label>
               <input type="tel" name="phone" id="phone" placeholder="(123) 456-7890" required>
-              
               <label for="address">Your Address</label>
               <input type="text" name="address" id="address" placeholder="Street, City, ZIP">
-              
               <label for="eventDate">Event Date</label>
               <input type="text" name="eventDate" id="eventDate" placeholder="MM/DD/YYYY" required>
-              
               <label for="headcount">Guest Count</label>
               <input type="number" name="headcount" id="headcount" placeholder="How many?" required>
-              
               <label for="eventType">Event Type</label>
               <select name="eventType" id="eventType" required>
                 <option value="backyard">Backyard Party</option>
                 <option value="wedding">Wedding</option>
                 <option value="other">Other</option>
               </select>
-              
               <label for="location">Event Location</label>
               <input type="text" name="location" id="location" placeholder="Where's the party?" required>
-              
               <label for="barService">Need a mobile bar?</label>
               <select name="barService" id="barService" required>
                 <option value="yes">Yes, please!</option>
                 <option value="no">No, thanks!</option>
               </select>
-              
               <label for="comments">Additional Party Details</label>
               <textarea name="comments" id="comments" rows="3" placeholder="Tell us a bit about your celebration"></textarea>
-              
               <button type="submit">Submit Booking Request</button>
             </form>
           </div>
-          <!-- Calendar Column -->
           <div class="calendar-container">
             <h3>Choose Your Date</h3>
             <div id="datepicker" style="margin: 0 auto;"></div>
+            <div class="availability-status" id="availabilityStatus">Check Raeanne's availability!</div>
           </div>
         </div>
       </div>
@@ -499,37 +727,27 @@
     <section class="info-section" id="quote">
       <div class="container">
         <h2>Quote Generator</h2>
-        <!-- When the user submits this form, the JavaScript will compile a mailto link -->
         <form class="info-form" id="quoteForm" onsubmit="submitQuoteForm(); return false;">
           <label for="qName">Your Name</label>
           <input type="text" id="qName" name="qName" placeholder="Your Name" required>
-          
           <label for="qEmail">Your Email</label>
           <input type="email" id="qEmail" name="qEmail" placeholder="you@example.com" required>
-  
           <label for="qHeadcount">Number of Guests</label>
           <input type="number" id="qHeadcount" name="qHeadcount" placeholder="Enter guest count" required>
-          
           <label for="qEventType">Event Type</label>
           <select id="qEventType" name="qEventType" required>
             <option value="backyard">Backyard Party</option>
             <option value="wedding">Wedding</option>
             <option value="other">Other</option>
           </select>
-          
           <label for="qBarService">Need a Mobile Bar?</label>
           <select id="qBarService" name="qBarService" required>
             <option value="yes">Yes</option>
             <option value="no">No</option>
           </select>
-          
           <button type="button" id="calculateQuote">Calculate Quote</button>
-          
           <div id="quoteResult" style="margin-top:20px;"></div>
-          
-          <!-- Hidden field to store calculated quote -->
           <input type="hidden" id="calculatedQuote" name="calculatedQuote" value="">
-  
           <button type="submit">Send Quote Request</button>
         </form>
       </div>
@@ -541,7 +759,7 @@
         <h2>Contact Us</h2>
         <p>Call: Raeanne (860) 517-6602</p>
         <p>Email: <a href="mailto:raiseaglassservices@gmail.com">raiseaglassservices@gmail.com</a></p>
-        <a href="#packages" class="btn">Book Now</a>
+        <a href="#booking" class="btn">Book Now</a>
       </div>
     </section>
   </main>
@@ -549,15 +767,20 @@
   <!-- FOOTER -->
   <footer class="footer">
     <div class="container">
-      <p>&copy; 2024 Raise A Glass LLC - Mobile Event Bartending</p>
+      <p>© 2024 Raise A Glass LLC - Mobile Event Bartending & Casino Fun</p>
     </div>
   </footer>
   
-  <!-- Floating Buttons to Open Pop-Ups -->
-  <button id="openQuotePopup" class="floating-btn" style="right:20px;">Quick Quote</button>
-  <button id="openSlotMachine" class="floating-btn" style="right:150px;">Play Slots</button>
+  <!-- Sticky Book Raeanne Button -->
+  <a href="#booking" class="sticky-book-btn">Book Raeanne Now!</a>
   
-  <!-- Pop-Up: Quick Quote Calculator (Draggable) -->
+  <!-- Floating Buttons for Pop-Ups -->
+  <button id="openQuotePopup" class="floating-btn">Quick Quote</button>
+  <button id="openSlotMachine" class="floating-btn">Slots</button>
+  <button id="openBlackjack" class="floating-btn">Blackjack</button>
+  <button id="openRocket" class="floating-btn">Rocket</button>
+  
+  <!-- Pop-Up: Quick Quote Calculator -->
   <div id="quotePopup" class="popup" style="display:none;">
     <div class="popup-header">
       <span class="popup-title">Quick Quote Calculator</span>
@@ -580,27 +803,82 @@
         <option value="yes">Yes</option>
         <option value="no">No</option>
       </select>
-      <button id="popupCalculateQuote">Calculate Quote</button>
+      <button id="popupCalculateQuote" class="casino-btn">Calculate Quote</button>
       <div id="popupQuoteResult" style="margin-top:10px; font-weight:bold;"></div>
     </div>
   </div>
   
-  <!-- Pop-Up: Bartender Slot Machine Game (Draggable) -->
+  <!-- Pop-Up: Slot Machine Game -->
   <div id="slotMachinePopup" class="popup" style="display:none;">
     <div class="popup-header">
       <span class="popup-title">Bartender Slot Machine</span>
       <button class="popup-close">X</button>
     </div>
     <div class="popup-content">
-      <div id="bankDisplay" style="font-weight:bold; margin-bottom:10px;">Bank: $1000</div>
-      <div id="slotDisplay" class="neon">
-        <span id="slot1">?</span>
-        <span id="slot2">?</span>
-        <span id="slot3">?</span>
+      <div id="slotBankDisplay" style="font-weight:bold; margin-bottom:10px;">Bank: $1000</div>
+      <div id="slotDisplay">
+        <div class="slot-reel" id="slot1">?</div>
+        <div class="slot-reel" id="slot2">?</div>
+        <div class="slot-reel" id="slot3">?</div>
       </div>
-      <button id="spinButton">Spin (Cost: $50)</button>
-      <button id="cashOutButton" style="margin-top:10px;">Cash Out</button>
+      <input type="number" id="slotBetInput" class="casino-input" min="1" max="500" value="10" placeholder="Bet ($1-$500)" />
+      <button id="slotSpinButton" class="casino-btn">Spin</button>
+      <button id="slotCashOutButton" class="casino-btn">Cash Out</button>
       <div id="slotResult" style="margin-top:10px; font-weight:bold;"></div>
+    </div>
+  </div>
+  
+  <!-- Pop-Up: Blackjack Game -->
+  <div id="blackjackPopup" class="popup" style="display:none;">
+    <div class="popup-header">
+      <span class="popup-title">Blackjack</span>
+      <button class="popup-close">X</button>
+    </div>
+    <div class="popup-content">
+      <div id="blackjackBankDisplay" style="font-weight:bold; margin-bottom:10px;">Bank: $1000</div>
+      <input type="number" id="blackjackBetInput" class="casino-input" min="1" max="500" value="10" placeholder="Bet ($1-$500)" />
+      <button id="blackjackStartButton" class="casino-btn">Start Game</button>
+      <div id="blackjackHands">
+        <div class="hand" id="playerHand">Player: </div>
+        <div class="hand" id="dealerHand">Dealer: </div>
+      </div>
+      <div id="blackjackControls" style="display:none;">
+        <button id="hitButton" class="casino-btn">Hit</button>
+        <button id="standButton" class="casino-btn">Stand</button>
+        <button id="doubleButton" class="casino-btn">Double Down</button>
+        <button id="splitButton" class="casino-btn" style="display:none;">Split</button>
+      </div>
+      <div id="blackjackResult" style="margin-top:10px; font-weight:bold;"></div>
+    </div>
+  </div>
+  
+  <!-- Pop-Up: Rocket Game -->
+  <div id="rocketPopup" class="popup" style="display:none;">
+    <div class="popup-header">
+      <span class="popup-title">Rocket Game</span>
+      <button class="popup-close">X</button>
+    </div>
+    <div class="popup-content">
+      <div id="rocketBankDisplay" style="font-weight:bold; margin-bottom:10px;">Bank: $1000</div>
+      <input type="number" id="rocketBetInput" class="casino-input" min="1" max="500" value="10" placeholder="Bet ($1-$500)" />
+      <button id="rocketStartButton" class="casino-btn">Launch Rocket</button>
+      <div id="rocketDisplay">
+        Multiplier: <span id="rocketMultiplier">1.00x</span>
+      </div>
+      <button id="rocketCashOutButton" class="casino-btn" style="display:none;">Cash Out</button>
+      <div id="rocketResult" style="margin-top:10px; font-weight:bold;"></div>
+    </div>
+  </div>
+  
+  <!-- Pop-Up: Booking Confirmation -->
+  <div id="bookingConfirmPopup" class="popup" style="display:none;">
+    <div class="popup-header">
+      <span class="popup-title">Booking Confirmed!</span>
+      <button class="popup-close">X</button>
+    </div>
+    <div class="popup-content">
+      <p id="confirmMessage">Your event with Raeanne is booked! We'll reach out soon to confirm details.</p>
+      <button class="btn" onclick="$('#bookingConfirmPopup').hide();">Close</button>
     </div>
   </div>
   
@@ -608,7 +886,13 @@
   <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
   <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
   <script>
-    // Function to compile booking form data into a mailto link
+    // Shared Casino Bank
+    let bank = 1000;
+    
+    // Simulated booked dates (for demo purposes)
+    const bookedDates = ["11/15/2024", "11/20/2024", "12/01/2024"];
+    
+    // Booking Form Submission
     function submitBookingForm() {
       var name = document.getElementById('name').value;
       var email = document.getElementById('email').value;
@@ -620,6 +904,11 @@
       var location = document.getElementById('location').value;
       var barService = document.getElementById('barService').value;
       var comments = document.getElementById('comments').value;
+      
+      if (bookedDates.includes(eventDate)) {
+        alert("Oops! Raeanne is already booked on this date. Please choose another.");
+        return;
+      }
       
       var subject = encodeURIComponent("New Booking Request from " + name);
       var body = encodeURIComponent(
@@ -636,9 +925,13 @@
       );
       
       window.location.href = "mailto:raiseaglassservices@gmail.com?subject=" + subject + "&body=" + body;
+      
+      $("#confirmMessage").html(`Your event with Raeanne is booked for ${eventDate}! We'll reach out soon to confirm details.`);
+      $("#bookingConfirmPopup").show();
+      $("#bookingForm")[0].reset();
     }
     
-    // Function to compile quote form data into a mailto link
+    // Quote Form Submission
     function submitQuoteForm() {
       var qName = document.getElementById('qName').value;
       var qEmail = document.getElementById('qEmail').value;
@@ -661,11 +954,39 @@
     }
     
     $(document).ready(function(){
-      // Initialize datepickers
-      $("#eventDate").datepicker({ minDate: 0, dateFormat: "mm/dd/yy" });
-      $("#datepicker").datepicker({ minDate: 0 });
+      // Initialize Datepickers
+      $("#eventDate").datepicker({ 
+        minDate: 0, 
+        dateFormat: "mm/dd/yy",
+        beforeShowDay: function(date) {
+          var formattedDate = $.datepicker.formatDate("mm/dd/yy", date);
+          return [!bookedDates.includes(formattedDate), bookedDates.includes(formattedDate) ? "booked" : ""];
+        },
+        onSelect: function(dateText) {
+          if (bookedDates.includes(dateText)) {
+            $("#availabilityStatus").html("Raeanne is booked on this date.").css("color", "#e07a5f");
+          } else {
+            $("#availabilityStatus").html("Raeanne is available! Lock it in!").css("color", "#3d405b");
+          }
+        }
+      });
+      $("#datepicker").datepicker({ 
+        minDate: 0, 
+        beforeShowDay: function(date) {
+          var formattedDate = $.datepicker.formatDate("mm/dd/yy", date);
+          return [!bookedDates.includes(formattedDate), bookedDates.includes(formattedDate) ? "booked" : ""];
+        },
+        onSelect: function(dateText) {
+          $("#eventDate").val(dateText);
+          if (bookedDates.includes(dateText)) {
+            $("#availabilityStatus").html("Raeanne is booked on this date.").css("color", "#e07a5f");
+          } else {
+            $("#availabilityStatus").html("Raeanne is available! Lock it in!").css("color", "#3d405b");
+          }
+        }
+      });
       
-      // Quote generator logic (in main section)
+      // Quote Generator Logic
       $("#calculateQuote").click(function(){
         var headcount = parseInt($("#qHeadcount").val());
         var eventType = $("#qEventType").val();
@@ -685,17 +1006,6 @@
         $("#calculatedQuote").val(total);
       });
       
-      // Quick Quote Pop-Up Logic
-      $("#openQuotePopup").click(function(){
-        $("#quotePopup").show();
-      });
-      $("#quotePopup").draggable({ handle: ".popup-header" });
-      $("#quotePopup .popup-close").click(function(){
-        $("#quotePopup").hide();
-      });
-      $("#quotePopup .popup-minimize").click(function(){
-        $("#quotePopup .popup-content").toggle();
-      });
       $("#popupCalculateQuote").click(function(){
         var headcount = parseInt($("#popupGuestCount").val());
         var eventType = $("#popupEventType").val();
@@ -711,55 +1021,327 @@
         $("#popupQuoteResult").html("Estimated Quote: $" + total);
       });
       
-      // Slot Machine Game Logic (Boosted Jackpot)
-      var bank = 1000;
-      var bet = 50;
-      // Updated multipliers: doubled values for bigger winnings
-      var slotEmojis = ["🍹", "🍸", "🍺", "🍷", "🍾"];
-      var multipliers = { "🍹": 10, "🍸": 20, "🍺": 6, "🍷": 16, "🍾": 30 };
+      // Pop-Up Handlers
+      $("#openQuotePopup").click(function(){ $("#quotePopup").show(); });
+      $("#quotePopup").draggable({ handle: ".popup-header" });
+      $("#quotePopup .popup-close").click(function(){ $("#quotePopup").hide(); });
+      $("#quotePopup .popup-minimize").click(function(){ $("#quotePopup .popup-content").toggle(); });
       
-      $("#openSlotMachine").click(function(){
-        $("#slotMachinePopup").show();
-      });
+      $("#bookingConfirmPopup").draggable({ handle: ".popup-header" });
+      $("#bookingConfirmPopup .popup-close").click(function(){ $("#bookingConfirmPopup").hide(); });
+      
+      $("#openSlotMachine").click(function(){ $("#slotMachinePopup").show(); });
       $("#slotMachinePopup").draggable({ handle: ".popup-header" });
-      $("#slotMachinePopup .popup-close").click(function(){
-        $("#slotMachinePopup").hide();
-      });
+      $("#slotMachinePopup .popup-close").click(function(){ $("#slotMachinePopup").hide(); });
       
-      $("#spinButton").click(function(){
-        if (bank < bet) {
-          $("#slotResult").html("Insufficient funds!");
+      $("#openBlackjack").click(function(){ $("#blackjackPopup").show(); });
+      $("#blackjackPopup").draggable({ handle: ".popup-header" });
+      $("#blackjackPopup .popup-close").click(function(){ $("#blackjackPopup").hide(); });
+      
+      $("#openRocket").click(function(){ $("#rocketPopup").show(); });
+      $("#rocketPopup").draggable({ handle: ".popup-header" });
+      $("#rocketPopup .popup-close").click(function(){ $("#rocketPopup").hide(); });
+      
+      // Update Bank Display Across Games
+      function updateBankDisplays() {
+        $("#slotBankDisplay").html("Bank: $" + bank);
+        $("#blackjackBankDisplay").html("Bank: $" + bank);
+        $("#rocketBankDisplay").html("Bank: $" + bank);
+      }
+      
+      // Slot Machine Logic
+      const slotEmojis = ["🍔", "🍕", "🍸", "💍", "💎"];
+      const slotPayScale = {
+        "🍔": { triple: 5, two: 1.5, prob: 0.3 },
+        "🍕": { triple: 10, two: 2, prob: 0.25 },
+        "🍸": { triple: 15, two: 2, prob: 0.2 },
+        "💍": { triple: 25, two: 2, prob: 0.15 },
+        "💎": { triple: 50, two: 2, prob: 0.1 } // Rare diamond
+      };
+      
+      $("#slotNavLink").click(function(){ $("#slotMachinePopup").show(); });
+      
+      $("#slotSpinButton").click(function(){
+        var bet = parseInt($("#slotBetInput").val());
+        if (isNaN(bet) || bet < 1 || bet > 500 || bet > bank) {
+          $("#slotResult").html("Invalid bet! Must be $1-$500 and within bank.");
           return;
         }
+        
         bank -= bet;
-        $("#bankDisplay").html("Bank: $" + bank);
-        // Randomly choose three emojis
-        var s1 = slotEmojis[Math.floor(Math.random() * slotEmojis.length)];
-        var s2 = slotEmojis[Math.floor(Math.random() * slotEmojis.length)];
-        var s3 = slotEmojis[Math.floor(Math.random() * slotEmojis.length)];
-        $("#slot1").html(s1);
-        $("#slot2").html(s2);
-        $("#slot3").html(s3);
-        // Check if all three match
-        if (s1 === s2 && s2 === s3) {
-          var payout = bet * multipliers[s1];
-          bank += payout;
-          $("#slotResult").html("Jackpot! You won $" + payout + "!");
-        } else {
-          $("#slotResult").html("No win. Try again!");
-        }
-        $("#bankDisplay").html("Bank: $" + bank);
+        updateBankDisplays();
+        $("#slotResult").html("Spinning...");
+        $(".slot-reel").addClass("spinning");
+        
+        setTimeout(function() {
+          var s1 = weightedRandom(slotEmojis, Object.values(slotPayScale).map(p => p.prob));
+          $("#slot1").html(s1).removeClass("spinning");
+          
+          setTimeout(function() {
+            var s2 = weightedRandom(slotEmojis, Object.values(slotPayScale).map(p => p.prob));
+            $("#slot2").html(s2).removeClass("spinning");
+            
+            setTimeout(function() {
+              var s3 = weightedRandom(slotEmojis, Object.values(slotPayScale).map(p => p.prob));
+              $("#slot3").html(s3).removeClass("spinning");
+              
+              var payout = 0;
+              if (s1 === s2 && s2 === s3) {
+                payout = bet * slotPayScale[s1].triple;
+                bank += payout;
+                $("#slotResult").html(`Jackpot! You won $${payout}!`);
+              } else if (s1 === s2 || s2 === s3 || s1 === s3) {
+                var winningEmoji = s1 === s2 ? s1 : s2 === s3 ? s2 : s1;
+                payout = bet * slotPayScale[winningEmoji].two;
+                bank += payout;
+                $("#slotResult").html(`Nice! You won $${payout}!`);
+              } else if (s1 === "💎" || s2 === "💎" || s3 === "💎") {
+                payout = bet * 1.5;
+                bank += payout;
+                $("#slotResult").html(`Diamond Bonus! You won $${payout}!`);
+              } else {
+                $("#slotResult").html("No win. Spin again!");
+              }
+              updateBankDisplays();
+            }, 600);
+          }, 400);
+        }, 200);
       });
       
-      $("#cashOutButton").click(function(){
+      $("#slotCashOutButton").click(function(){
         alert("You cashed out with $" + bank + " in your bank!");
         bank = 1000;
-        $("#bankDisplay").html("Bank: $" + bank);
+        updateBankDisplays();
         $("#slotResult").html("");
         $("#slot1, #slot2, #slot3").html("?");
       });
       
-      // Fun Fact Ticker: 100 Fun Facts about Connecticut & Parties
+      // Blackjack Logic
+      const suits = ["♠", "♥", "♦", "♣"];
+      const values = ["2", "3", "4", "5", "6", "7", "8", "9", "10", "J", "Q", "K", "A"];
+      let deck = [];
+      let playerHands = [[]];
+      let dealerHand = [];
+      let currentHand = 0;
+      
+      function buildDeck() {
+        deck = [];
+        for (let suit of suits) {
+          for (let value of values) {
+            deck.push(value + suit);
+          }
+        }
+        shuffle(deck);
+      }
+      
+      function shuffle(array) {
+        for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1));
+          [array[i], array[j]] = [array[j], array[i]];
+        }
+      }
+      
+      function getCardValue(card) {
+        const value = card.slice(0, -1);
+        if (["J", "Q", "K"].includes(value)) return 10;
+        if (value === "A") return 11;
+        return parseInt(value);
+      }
+      
+      function calculateHand(hand) {
+        let total = 0;
+        let aces = 0;
+        hand.forEach(card => {
+          let value = getCardValue(card);
+          if (value === 11) aces++;
+          total += value;
+        });
+        while (total > 21 && aces > 0) {
+          total -= 10;
+          aces--;
+        }
+        return total;
+      }
+      
+      $("#blackjackNavLink").click(function(){ $("#blackjackPopup").show(); });
+      
+      $("#blackjackStartButton").click(function(){
+        var bet = parseInt($("#blackjackBetInput").val());
+        if (isNaN(bet) || bet < 1 || bet > 500 || bet > bank) {
+          $("#blackjackResult").html("Invalid bet! Must be $1-$500 and within bank.");
+          return;
+        }
+        
+        bank -= bet;
+        updateBankDisplays();
+        buildDeck();
+        playerHands = [[deck.pop(), deck.pop()]];
+        dealerHand = [deck.pop(), "??"];
+        currentHand = 0;
+        
+        $("#playerHand").html("Player: " + playerHands[0].join(", "));
+        $("#dealerHand").html("Dealer: " + dealerHand.join(", "));
+        $("#blackjackControls").show();
+        $("#blackjackResult").html("");
+        
+        if (playerHands[0].length === 2 && playerHands[0][0][0] === playerHands[0][1][0]) {
+          $("#splitButton").show();
+        } else {
+          $("#splitButton").hide();
+        }
+        
+        if (calculateHand(playerHands[0]) === 21) {
+          endBlackjackRound(bet);
+        }
+      });
+      
+      $("#hitButton").click(function(){
+        playerHands[currentHand].push(deck.pop());
+        $("#playerHand").html("Player: " + playerHands[currentHand].join(", "));
+        if (calculateHand(playerHands[currentHand]) > 21) {
+          $("#blackjackResult").html("Bust! You lose.");
+          $("#blackjackControls").hide();
+        }
+      });
+      
+      $("#standButton").click(function(){
+        if (currentHand < playerHands.length - 1) {
+          currentHand++;
+          $("#playerHand").html("Player: " + playerHands[currentHand].join(", "));
+        } else {
+          endBlackjackRound(parseInt($("#blackjackBetInput").val()));
+        }
+      });
+      
+      $("#doubleButton").click(function(){
+        var bet = parseInt($("#blackjackBetInput").val());
+        if (bank < bet) {
+          $("#blackjackResult").html("Not enough funds to double!");
+          return;
+        }
+        bank -= bet;
+        updateBankDisplays();
+        playerHands[currentHand].push(deck.pop());
+        $("#playerHand").html("Player: " + playerHands[currentHand].join(", "));
+        if (calculateHand(playerHands[currentHand]) <= 21) {
+          endBlackjackRound(bet * 2);
+        } else {
+          $("#blackjackResult").html("Bust! You lose.");
+          $("#blackjackControls").hide();
+        }
+      });
+      
+      $("#splitButton").click(function(){
+        var bet = parseInt($("#blackjackBetInput").val());
+        if (bank < bet) {
+          $("#blackjackResult").html("Not enough funds to split!");
+          return;
+        }
+        bank -= bet;
+        updateBankDisplays();
+        let card1 = playerHands[0][0];
+        let card2 = playerHands[0][1];
+        playerHands = [[card1, deck.pop()], [card2, deck.pop()]];
+        $("#playerHand").html("Player Hand 1: " + playerHands[0].join(", "));
+        currentHand = 0;
+      });
+      
+      function endBlackjackRound(bet) {
+        $("#blackjackControls").hide();
+        dealerHand[1] = deck.pop();
+        while (calculateHand(dealerHand) < 17) {
+          dealerHand.push(deck.pop());
+        }
+        $("#dealerHand").html("Dealer: " + dealerHand.join(", "));
+        
+        let dealerTotal = calculateHand(dealerHand);
+        let playerTotal = calculateHand(playerHands[currentHand]);
+        
+        if (dealerTotal > 21) {
+          bank += bet * 2;
+          $("#blackjackResult").html("Dealer busts! You win $" + (bet * 2) + "!");
+        } else if (playerTotal > 21) {
+          $("#blackjackResult").html("Bust! You lose.");
+        } else if (playerTotal === 21 && playerHands[currentHand].length === 2) {
+          bank += bet * 2.5;
+          $("#blackjackResult").html("Blackjack! You win $" + (bet * 2.5) + "!");
+        } else if (playerTotal > dealerTotal) {
+          bank += bet * 2;
+          $("#blackjackResult").html("You win $" + (bet * 2) + "!");
+        } else if (playerTotal === dealerTotal) {
+          bank += bet;
+          $("#blackjackResult").html("Push! Bet returned.");
+        } else {
+          $("#blackjackResult").html("Dealer wins!");
+        }
+        updateBankDisplays();
+      }
+      
+      // Rocket Game Logic
+      let rocketInterval = null;
+      let currentMultiplier = 1.00;
+      
+      $("#rocketNavLink").click(function(){ $("#rocketPopup").show(); });
+      
+      $("#rocketStartButton").click(function(){
+        var bet = parseInt($("#rocketBetInput").val());
+        if (isNaN(bet) || bet < 1 || bet > 500 || bet > bank) {
+          $("#rocketResult").html("Invalid bet! Must be $1-$500 and within bank.");
+          return;
+        }
+        
+        bank -= bet;
+        updateBankDisplays();
+        currentMultiplier = 1.00;
+        $("#rocketMultiplier").html(currentMultiplier.toFixed(2) + "x");
+        $("#rocketCashOutButton").show();
+        $("#rocketStartButton").hide();
+        $("#rocketResult").html("Rocket launched!");
+        
+        let crashPoint = generateCrashPoint();
+        rocketInterval = setInterval(function(){
+          currentMultiplier += 0.05;
+          $("#rocketMultiplier").html(currentMultiplier.toFixed(2) + "x");
+          if (currentMultiplier >= crashPoint) {
+            clearInterval(rocketInterval);
+            $("#rocketResult").html("Crash! You lost.");
+            $("#rocketCashOutButton").hide();
+            $("#rocketStartButton").show();
+          }
+        }, 100);
+      });
+      
+      $("#rocketCashOutButton").click(function(){
+        clearInterval(rocketInterval);
+        let payout = Math.floor(parseInt($("#rocketBetInput").val()) * currentMultiplier);
+        bank += payout;
+        $("#rocketResult").html(`Cashed out! You won $${payout}!`);
+        $("#rocketCashOutButton").hide();
+        $("#rocketStartButton").show();
+        updateBankDisplays();
+      });
+      
+      function generateCrashPoint() {
+        let r = Math.random();
+        if (r < 0.5) return 1.1 + Math.random() * 3.9; // 1.1x - 5x (50%)
+        if (r < 0.8) return 6 + Math.random() * 4; // 6x - 10x (30%)
+        if (r < 0.95) return 20 + Math.random() * 80; // 20x - 100x (15%)
+        if (r < 0.99) return 200 + Math.random() * 300; // 200x - 500x (4%)
+        return 500 + Math.random() * 500; // 500x - 1000x (1%)
+      }
+      
+      // Utility for Weighted Random Selection
+      function weightedRandom(items, weights) {
+        let totalWeight = weights.reduce((a, b) => a + b, 0);
+        let r = Math.random() * totalWeight;
+        for (let i = 0; i < items.length; i++) {
+          r -= weights[i];
+          if (r <= 0) return items[i];
+        }
+        return items[items.length - 1];
+      }
+      
+      // Fun Fact Ticker
       var facts = [
         "Connecticut is known for its vibrant party scene in New Haven!",
         "Hartford has a rich history of speakeasies and underground bars.",
@@ -876,6 +1458,25 @@
       }
       updateFunFact();
       setInterval(updateFunFact, 5000);
+      
+      // Smooth Scrolling for Nav Links
+      $('a[href*="#"]').not('[href="#"]').click(function(event) {
+        if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
+          event.preventDefault();
+          var target = $(this.hash);
+          target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
+          if (target.length) {
+            $('html, body').animate({
+              scrollTop: target.offset().top - 70
+            }, 800);
+            return false;
+          }
+          
+          if (this.hash === "#slots") $("#slotMachinePopup").show();
+          if (this.hash === "#blackjack") $("#blackjackPopup").show();
+          if (this.hash === "#rocket") $("#rocketPopup").show();
+        }
+      });
     });
   </script>
 </body>
