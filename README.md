@@ -24,6 +24,11 @@
             overflow-x: hidden;
             -webkit-font-smoothing: antialiased;
             -webkit-overflow-scrolling: touch;
+            transition: background 0.3s, color 0.3s;
+        }
+        body.dark-mode {
+            background: linear-gradient(to bottom right, #2c2c2c, #4a4a4a);
+            color: #ddd;
         }
         h1 {
             font-family: 'Dancing Script', cursive;
@@ -35,6 +40,26 @@
             position: relative;
         }
         h2 { color: #3d405b; font-size: 2.5em; margin-bottom: 20px; text-align: center; }
+        body.dark-mode h2 { color: #f2cc8f; }
+
+        /* Toggle Button */
+        #mode-toggle {
+            position: fixed;
+            top: 10px;
+            left: 10px;
+            z-index: 10001;
+            padding: 8px 15px;
+            background: #e07a5f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            transition: background 0.3s;
+        }
+        #mode-toggle:hover { background: #3d405b; }
+        body.dark-mode #mode-toggle { background: #ffddd2; color: #333; }
 
         /* FUN TICKER (Top Bar) */
         #fun-fact-box {
@@ -50,6 +75,7 @@
             z-index: 10000;
             transition: transform 0.3s ease;
         }
+        body.dark-mode #fun-fact-box { background-color: rgba(61, 64, 91, 0.95); color: #ffddd2; }
 
         /* BUBBLES & FIZZ */
         .bubbles {
@@ -69,10 +95,7 @@
             opacity: 0;
             animation: riseAndFizz 6s infinite ease-out;
         }
-        .bubble.suds {
-            background: radial-gradient(circle, rgba(255,255,255,0.9), rgba(255,255,255,0));
-            animation: sudsPop 4s infinite ease-out;
-        }
+        .bubble.suds { background: radial-gradient(circle, rgba(255,255,255,0.9), rgba(255,255,255,0)); animation: sudsPop 4s infinite ease-out; }
         @keyframes riseAndFizz {
             0% { transform: translateY(100vh) scale(0.3); opacity: 0.8; }
             50% { transform: translateY(50vh) scale(0.8) translateX(10px); opacity: 1; }
@@ -111,6 +134,7 @@
             text-shadow: 2px 2px 5px #333;
             position: relative;
         }
+        body.dark-mode .header { background: #1a1a2e; border-bottom-color: #ffddd2; }
         .header .tagline { text-align: center; font-size: 1.8em; color: #f2cc8f; }
 
         /* NAVIGATION */
@@ -118,37 +142,41 @@
             background-color: #e07a5f;
             text-align: center;
             padding: 15px 0;
-            margin-top: 20px;
             z-index: 1000;
             position: sticky;
             top: 0;
             box-shadow: 0 2px 10px rgba(0,0,0,0.2);
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 20px;
         }
+        body.dark-mode .main-nav { background-color: #3d405b; }
         .main-nav a {
             color: #fff;
             text-decoration: none;
-            margin: 0 20px;
             font-size: 1.2em;
             transition: color 0.3s, transform 0.2s;
-            display: inline-block;
+            white-space: nowrap;
         }
         .main-nav a:hover { color: #ffddd2; transform: scale(1.1); }
 
         /* Glamorous Rae's Casino Link */
         .casino-link {
-            position: relative;
             font-family: 'Dancing Script', cursive;
             font-size: 1.4em;
             color: #ffd700;
-            text-shadow: 0 0 5px #ffd700, 0 0 10px #ff4500;
+            text-shadow: 0 0 10px #ffd700, 0 0 20px #ff4500;
             padding: 5px 15px;
             border: 2px solid #ffd700;
             border-radius: 8px;
-            animation: casinoGlow 2s infinite alternate;
+            animation: casinoPulse 1.5s infinite;
+            background: radial-gradient(circle, rgba(255,215,0,0.2), transparent);
         }
-        @keyframes casinoGlow {
-            0% { box-shadow: 0 0 5px #ffd700; }
-            100% { box-shadow: 0 0 15px #ff4500; }
+        @keyframes casinoPulse {
+            0% { transform: scale(1); box-shadow: 0 0 10px #ffd700, 0 0 20px #ff4500; }
+            50% { transform: scale(1.05); box-shadow: 0 0 20px #ffd700, 0 0 30px #ff4500; }
+            100% { transform: scale(1); box-shadow: 0 0 10px #ffd700, 0 0 20px #ff4500; }
         }
 
         /* Casino Dropdown */
@@ -168,6 +196,7 @@
             left: 50%;
             transform: translateX(-50%);
         }
+        body.dark-mode .casino-dropdown-content { background-color: #1a1a2e; }
         .casino-dropdown-content a {
             color: #fff;
             padding: 12px 16px;
@@ -177,10 +206,7 @@
             font-size: 1em;
             margin: 0;
         }
-        .casino-dropdown-content a:hover {
-            background-color: #e07a5f;
-            color: #ffd700;
-        }
+        .casino-dropdown-content a:hover { background-color: #e07a5f; color: #ffd700; }
         .casino-dropdown:hover .casino-dropdown-content { display: block; }
 
         /* COLUMNS (Old Mansion Vibe) */
@@ -193,6 +219,7 @@
             z-index: -1;
             border-radius: 0 25px 25px 0;
         }
+        body.dark-mode .columns { background: rgba(61, 64, 91, 0.8); }
         .left-column {
             left: 0;
             border-right: 4px solid #3d405b;
@@ -216,6 +243,7 @@
             border-radius: 25px;
             position: relative;
         }
+        body.dark-mode section { background: rgba(40, 40, 40, 0.95); border-color: #ffddd2; }
         .container { width: 80%; margin: 0 auto; max-width: 1200px; }
         ul { list-style-type: none; margin: 40px 0; padding: 0; }
         ul li {
@@ -227,6 +255,7 @@
             box-shadow: 4px 4px 15px rgba(0,0,0,0.2);
             transition: transform 0.3s;
         }
+        body.dark-mode ul li { background: rgba(61, 64, 91, 0.9); color: #ddd; }
         ul li:hover { transform: translateY(-5px); }
 
         /* BUTTONS WITH FIZZ */
@@ -244,11 +273,13 @@
             position: relative;
             overflow: hidden;
         }
+        body.dark-mode .btn { background: linear-gradient(to right, #ffddd2, #1a1a2e); }
         .btn:hover {
             background: linear-gradient(to right, #3d405b, #e07a5f);
             box-shadow: 7px 7px 20px rgba(0,0,0,0.4);
             transform: scale(1.05);
         }
+        body.dark-mode .btn:hover { background: linear-gradient(to right, #1a1a2e, #ffddd2); }
         .btn::after {
             content: "";
             position: absolute;
@@ -278,40 +309,17 @@
             border-top: 4px solid #81b29a;
             box-shadow: 0 -4px 8px rgba(0,0,0,0.3);
         }
-        .footer a {
-            color: #ffddd2;
-            text-decoration: none;
-            margin: 0 10px;
-            font-size: 1.3em;
-        }
-        .footer a:hover {
-            text-decoration: underline;
-            color: #ffffff;
-        }
+        body.dark-mode .footer { background-color: #1a1a2e; border-top-color: #ffddd2; }
+        .footer a { color: #ffddd2; text-decoration: none; margin: 0 10px; font-size: 1.3em; }
+        .footer a:hover { text-decoration: underline; color: #ffffff; }
 
         /* INFO SECTIONS */
-        .info-section {
-            padding: 80px 0;
-            background: rgba(255,245,238,0.95);
-            border: 4px solid #e07a5f;
-            margin: 40px 0;
-            box-shadow: 8px 8px 20px rgba(0,0,0,0.3);
-            border-radius: 25px;
-        }
-        .info-form {
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: left;
-        }
-        .info-form label {
-            font-size: 1em;
-            display: block;
-            margin-bottom: 5px;
-            color: #3d405b;
-        }
-        .info-form input,
-        .info-form select,
-        .info-form textarea {
+        .info-section { padding: 80px 0; background: rgba(255,245,238,0.95); border: 4px solid #e07a5f; margin: 40px 0; box-shadow: 8px 8px 20px rgba(0,0,0,0.3); border-radius: 25px; }
+        body.dark-mode .info-section { background: rgba(40, 40, 40, 0.95); border-color: #ffddd2; }
+        .info-form { max-width: 600px; margin: 0 auto; text-align: left; }
+        .info-form label { font-size: 1em; display: block; margin-bottom: 5px; color: #3d405b; }
+        body.dark-mode .info-form label { color: #f2cc8f; }
+        .info-form input, .info-form select, .info-form textarea {
             width: 100%;
             padding: 12px;
             margin-bottom: 15px;
@@ -321,12 +329,9 @@
             font-family: 'Montserrat', sans-serif;
             transition: border-color 0.3s;
         }
-        .info-form input:focus,
-        .info-form select:focus,
-        .info-form textarea:focus {
-            border-color: #e07a5f;
-            outline: none;
-        }
+        body.dark-mode .info-form input, body.dark-mode .info-form select, body.dark-mode .info-form textarea { background: #333; color: #ddd; border-color: #555; }
+        .info-form input:focus, .info-form select:focus, .info-form textarea:focus { border-color: #e07a5f; outline: none; }
+        body.dark-mode .info-form input:focus, body.dark-mode .info-form select:focus, body.dark-mode .info-form textarea:focus { border-color: #ffddd2; }
         .info-form button {
             display: block;
             width: 100%;
@@ -339,40 +344,23 @@
             cursor: pointer;
             transition: background 0.3s, transform 0.2s;
         }
-        .info-form button:hover {
-            background: linear-gradient(to right, #3d405b, #e07a5f);
-            transform: scale(1.02);
-        }
-        #quoteResult {
-            font-size: 1.5em;
-            text-align: center;
-            color: #3d405b;
-            margin-top: 20px;
-        }
+        body.dark-mode .info-form button { background: linear-gradient(to right, #ffddd2, #1a1a2e); }
+        .info-form button:hover { background: linear-gradient(to right, #3d405b, #e07a5f); transform: scale(1.02); }
+        body.dark-mode .info-form button:hover { background: linear-gradient(to right, #1a1a2e, #ffddd2); }
+        #quoteResult { font-size: 1.5em; text-align: center; color: #3d405b; margin-top: 20px; }
+        body.dark-mode #quoteResult { color: #f2cc8f; }
 
         /* ABOUT SECTION */
-        .about-section {
-            padding: 80px 0;
-            background: rgba(255,245,238,0.98);
-            border: 4px solid #e07a5f;
-            margin: 40px 0;
-            box-shadow: 8px 8px 20px rgba(0,0,0,0.3);
-            border-radius: 25px;
-        }
-        .about-section p {
-            font-size: 1.3em;
-            max-width: 700px;
-            margin: 0 auto;
-            line-height: 1.6;
-            text-align: center;
-            color: #3d405b;
-        }
+        .about-section { padding: 80px 0; background: rgba(255,245,238,0.98); border: 4px solid #e07a5f; margin: 40px 0; box-shadow: 8px 8px 20px rgba(0,0,0,0.3); border-radius: 25px; }
+        body.dark-mode .about-section { background: rgba(40, 40, 40, 0.98); border-color: #ffddd2; }
+        .about-section p { font-size: 1.3em; max-width: 700px; margin: 0 auto; line-height: 1.6; text-align: center; color: #3d405b; }
+        body.dark-mode .about-section p { color: #ddd; }
 
         /* RESPONSIVE DESIGN */
         @media (max-width: 768px) {
             .container { width: 90%; }
-            .main-nav { padding: 10px 0; }
-            .main-nav a { margin: 8px; font-size: 1em; display: block; }
+            .main-nav { padding: 10px 0; gap: 15px; }
+            .main-nav a { font-size: 1em; }
             .casino-link { font-size: 1.2em; padding: 3px 10px; }
             .casino-dropdown-content { position: static; transform: none; width: 100%; }
             .columns { display: none; }
@@ -382,31 +370,16 @@
             h1 { font-size: 2.5em; }
             h2 { font-size: 2em; }
             .header { padding: 40px 0; }
-            .info-form input,
-            .info-form select,
-            .info-form textarea { font-size: 1em; padding: 10px; }
+            .info-form input, .info-form select, .info-form textarea { font-size: 1em; padding: 10px; }
             .champagne-glasses { width: 40px; height: 40px; }
-        }
-        @media only screen and (max-width: 414px) and (-webkit-min-device-pixel-ratio: 2) {
-            body { padding-top: env(safe-area-inset-top); padding-bottom: env(safe-area-inset-bottom); }
-            .main-nav { padding: 8px 0; }
-            .main-nav a { font-size: 0.9em; margin: 6px; }
-            .casino-link { font-size: 1.1em; }
-            .btn { padding: 10px 20px; font-size: 0.9em; }
-            #fun-fact-box { font-size: 0.85em; padding: 8px; }
-            .champagne-glasses { width: 30px; height: 30px; right: 10px; }
         }
 
         /* Booking & Calendar Combined */
-        .booking-calendar {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            gap: 20px;
-        }
+        .booking-calendar { display: flex; justify-content: space-between; align-items: flex-start; gap: 20px; }
         .booking-calendar .booking-form { flex: 1; }
         .booking-calendar .calendar-container { flex: 1; max-width: 350px; }
         .availability-status { margin-top: 10px; font-size: 1.1em; color: #3d405b; }
+        body.dark-mode .availability-status { color: #f2cc8f; }
 
         /* Sticky Book Raeanne Button */
         .sticky-book-btn {
@@ -423,12 +396,14 @@
             z-index: 10001;
             transition: transform 0.3s;
         }
+        body.dark-mode .sticky-book-btn { background: #ffddd2; color: #333; }
         .sticky-book-btn:hover { transform: scale(1.1); background: #3d405b; }
+        body.dark-mode .sticky-book-btn:hover { background: #1a1a2e; color: #fff; }
 
         /* Floating Buttons for Pop-Ups - Adjusted Positioning */
         .floating-btn {
             position: fixed;
-            bottom: 70px; /* Moved up to avoid overlapping Book Raeanne button */
+            bottom: 70px;
             margin: 10px;
             background: #3d405b;
             color: #fff;
@@ -441,193 +416,67 @@
             font-size: 1em;
             transition: background 0.3s, transform 0.2s;
         }
+        body.dark-mode .floating-btn { background: #ffddd2; color: #333; }
         .floating-btn:hover { background: #e07a5f; transform: scale(1.05); }
+        body.dark-mode .floating-btn:hover { background: #1a1a2e; color: #fff; }
         #openQuotePopup { right: 20px; }
-        #openSlotMachine { right: 120px; }
-        #openBlackjack { right: 220px; }
-        #openRocket { right: 320px; }
+        #openSlotMachine { right: 150px; }
+        #openBlackjack { right: 280px; }
+        #openRocket { right: 410px; }
 
         /* Pop-Up Windows */
-        .popup {
-            position: fixed;
-            top: 50px;
-            left: 50px;
-            background: #fff;
-            border: 2px solid #3d405b;
-            border-radius: 10px;
-            z-index: 10000;
-            box-shadow: 5px 5px 20px rgba(0,0,0,0.5);
-            max-width: 90%;
-        }
-        .popup-header {
-            background: #3d405b;
-            color: #fff;
-            padding: 8px;
-            cursor: move;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-top-left-radius: 8px;
-            border-top-right-radius: 8px;
-        }
+        .popup { position: fixed; top: 50px; left: 50px; background: #fff; border: 2px solid #3d405b; border-radius: 10px; z-index: 10000; box-shadow: 5px 5px 20px rgba(0,0,0,0.5); max-width: 90%; }
+        body.dark-mode .popup { background: #333; border-color: #ffddd2; }
+        .popup-header { background: #3d405b; color: #fff; padding: 8px; cursor: move; display: flex; justify-content: space-between; align-items: center; border-top-left-radius: 8px; border-top-right-radius: 8px; }
+        body.dark-mode .popup-header { background: #1a1a2e; }
         .popup-header .popup-title { font-weight: bold; }
-        .popup-header button {
-            background: transparent;
-            border: none;
-            color: #fff;
-            font-size: 1em;
-            cursor: pointer;
-            margin-left: 5px;
-        }
+        .popup-header button { background: transparent; border: none; color: #fff; font-size: 1em; cursor: pointer; margin-left: 5px; }
         .popup-content { padding: 15px; }
+        body.dark-mode .popup-content { color: #ddd; }
         .popup .hidden { display: none; }
 
         /* Enhanced Casino Game Styles */
         /* Slot Machine Popup */
-        #slotMachinePopup {
-            width: 450px;
-            background: linear-gradient(135deg, #ffeb3b, #ff5722);
-            border-color: #ff9800;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(255, 165, 0, 0.5);
-        }
-        #slotDisplay {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            font-size: 4em;
-            margin: 20px 0;
-            background: rgba(0,0,0,0.1);
-            padding: 15px;
-            border-radius: 10px;
-            box-shadow: inset 0 0 10px rgba(0,0,0,0.3);
-        }
-        .slot-reel {
-            width: 80px;
-            height: 80px;
-            text-align: center;
-            line-height: 80px;
-            background: linear-gradient(#ffffff, #e0e0e0);
-            border-radius: 10px;
-            border: 2px solid #ffd700;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            font-weight: bold;
-            color: #d32f2f;
-        }
-        .slot-reel.spinning {
-            animation: spinReel 0.3s linear infinite;
-            background: linear-gradient(#fff, #ffeb3b);
-        }
-        @keyframes spinReel {
-            0% { transform: translateY(-100%) rotate(0deg); }
-            100% { transform: translateY(100%) rotate(360deg); }
-        }
-        #slotBetInput {
-            margin: 15px 0;
-            padding: 10px;
-            font-size: 1.1em;
-            border-radius: 8px;
-            border: 2px solid #ff9800;
-            background: rgba(255,255,255,0.9);
-        }
+        #slotMachinePopup { width: 450px; background: linear-gradient(135deg, #ffeb3b, #ff5722); border-color: #ff9800; border-radius: 15px; box-shadow: 0 0 20px rgba(255, 165, 0, 0.5); }
+        #slotDisplay { display: flex; justify-content: center; gap: 15px; font-size: 4em; margin: 20px 0; background: rgba(0,0,0,0.1); padding: 15px; border-radius: 10px; box-shadow: inset 0 0 10px rgba(0,0,0,0.3); }
+        .slot-reel { width: 80px; height: 80px; text-align: center; line-height: 80px; background: linear-gradient(#ffffff, #e0e0e0); border-radius: 10px; border: 2px solid #ffd700; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-weight: bold; color: #d32f2f; }
+        body.dark-mode .slot-reel { background: linear-gradient(#555, #333); color: #ffeb3b; }
+        .slot-reel.spinning { animation: spinReel 0.3s linear infinite; background: linear-gradient(#fff, #ffeb3b); }
+        @keyframes spinReel { 0% { transform: translateY(-100%) rotate(0deg); } 100% { transform: translateY(100%) rotate(360deg); } }
+        #slotBetInput { margin: 15px 0; padding: 10px; font-size: 1.1em; border-radius: 8px; border: 2px solid #ff9800; background: rgba(255,255,255,0.9); }
+        body.dark-mode #slotBetInput { background: #444; color: #ddd; }
 
         /* Blackjack Popup */
-        #blackjackPopup {
-            width: 550px;
-            background: linear-gradient(135deg, #2e7d32, #4caf50);
-            border-color: #388e3c;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(76, 175, 80, 0.5);
-        }
-        #blackjackHands {
-            display: flex;
-            justify-content: space-between;
-            margin: 20px 0;
-            gap: 15px;
-        }
-        .hand {
-            width: 48%;
-            padding: 15px;
-            background: rgba(255,255,255,0.9);
-            border-radius: 10px;
-            border: 2px solid #fff;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-            font-size: 1.2em;
-            color: #1b5e20;
-            background-image: url('https://www.transparenttextures.com/patterns/cardboard-flat.png');
-        }
+        #blackjackPopup { width: 550px; background: linear-gradient(135deg, #2e7d32, #4caf50); border-color: #388e3c; border-radius: 15px; box-shadow: 0 0 20px rgba(76, 175, 80, 0.5); }
+        #blackjackHands { display: flex; justify-content: space-between; margin: 20px 0; gap: 15px; }
+        .hand { width: 48%; padding: 15px; background: rgba(255,255,255,0.9); border-radius: 10px; border: 2px solid #fff; box-shadow: 0 4px 10px rgba(0,0,0,0.2); font-size: 1.2em; color: #1b5e20; background-image: url('https://www.transparenttextures.com/patterns/cardboard-flat.png'); }
+        body.dark-mode .hand { background: rgba(61, 64, 91, 0.9); color: #ddd; border-color: #ffddd2; }
         #blackjackResult { margin-top: 15px; font-weight: bold; color: #fff; text-shadow: 1px 1px 2px #000; }
+        body.dark-mode #blackjackResult { color: #ffddd2; }
 
         /* Rocket Game Popup */
-        #rocketPopup {
-            width: 450px;
-            background: linear-gradient(135deg, #0288d1, #4fc3f7);
-            border-color: #0277bd;
-            border-radius: 15px;
-            box-shadow: 0 0 20px rgba(2, 136, 209, 0.5);
-        }
-        #rocketDisplay {
-            font-size: 2em;
-            text-align: center;
-            margin: 20px 0;
-            color: #fff;
-            background: rgba(0,0,0,0.2);
-            padding: 15px;
-            border-radius: 10px;
-            position: relative;
-            overflow: hidden;
-        }
-        #rocketDisplay::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            left: 50%;
-            width: 20px;
-            height: 100px;
-            background: #ffeb3b;
-            transform: translateX(-50%) rotate(45deg);
-            animation: rocketTrail 1s infinite linear;
-        }
-        @keyframes rocketTrail {
-            0% { top: 100%; }
-            100% { top: -50%; }
-        }
-        #rocketMultiplier {
-            font-size: 3.5em;
-            color: #ffeb3b;
-            text-shadow: 0 0 10px #ff5722;
-        }
+        #rocketPopup { width: 450px; background: linear-gradient(135deg, #0288d1, #4fc3f7); border-color: #0277bd; border-radius: 15px; box-shadow: 0 0 20px rgba(2, 136, 209, 0.5); }
+        #rocketDisplay { font-size: 2em; text-align: center; margin: 20px 0; color: #fff; background: rgba(0,0,0,0.2); padding: 15px; border-radius: 10px; position: relative; overflow: hidden; }
+        body.dark-mode #rocketDisplay { color: #ffddd2; }
+        #rocketDisplay::before { content: ''; position: absolute; top: -50%; left: 50%; width: 20px; height: 100px; background: #ffeb3b; transform: translateX(-50%) rotate(45deg); animation: rocketTrail 1s infinite linear; }
+        @keyframes rocketTrail { 0% { top: 100%; } 100% { top: -50%; } }
+        #rocketMultiplier { font-size: 3.5em; color: #ffeb3b; text-shadow: 0 0 10px #ff5722; }
         #rocketResult { margin-top: 15px; font-weight: bold; color: #fff; text-shadow: 1px 1px 2px #000; }
+        body.dark-mode #rocketResult { color: #ffddd2; }
 
         /* Shared Casino Styles */
-        .casino-btn {
-            padding: 10px 20px;
-            margin: 5px;
-            background: linear-gradient(to right, #ff9800, #f44336);
-            border: none;
-            color: #fff;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: transform 0.2s, box-shadow 0.2s;
-            font-size: 1.1em;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.3);
-        }
-        .casino-btn:hover {
-            background: linear-gradient(to right, #f44336, #ff9800);
-            transform: scale(1.05);
-            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
-        }
-        .casino-input {
-            padding: 10px;
-            margin: 5px;
-            border-radius: 8px;
-            font-size: 1.1em;
-            border: 2px solid #fff;
-            background: rgba(255,255,255,0.9);
-        }
+        .casino-btn { padding: 10px 20px; margin: 5px; background: linear-gradient(to right, #ff9800, #f44336); border: none; color: #fff; border-radius: 8px; cursor: pointer; transition: transform 0.2s, box-shadow 0.2s; font-size: 1.1em; box-shadow: 0 2px 5px rgba(0,0,0,0.3); }
+        body.dark-mode .casino-btn { background: linear-gradient(to right, #ffddd2, #1a1a2e); }
+        .casino-btn:hover { background: linear-gradient(to right, #f44336, #ff9800); transform: scale(1.05); box-shadow: 0 4px 10px rgba(0,0,0,0.4); }
+        body.dark-mode .casino-btn:hover { background: linear-gradient(to right, #1a1a2e, #ffddd2); }
+        .casino-input { padding: 10px; margin: 5px; border-radius: 8px; font-size: 1.1em; border: 2px solid #fff; background: rgba(255,255,255,0.9); }
+        body.dark-mode .casino-input { background: #444; color: #ddd; border-color: #ffddd2; }
     </style>
 </head>
 <body>
+    <!-- Mode Toggle -->
+    <button id="mode-toggle">Toggle Dark Mode</button>
+
     <!-- Fun Fact Ticker -->
     <div id="fun-fact-box">Did you know? Loading fun facts...</div>
     
@@ -650,15 +499,12 @@
         <div class="container">
             <h1>Raise A Glass LLC 
                 <svg class="champagne-glasses" viewBox="0 0 60 60" fill="none" stroke="#f4f1de" stroke-width="2">
-                    <!-- Left Glass -->
                     <path d="M15 15 L15 35 Q15 40 20 40 L25 40" />
                     <path d="M25 40 L25 50" />
                     <circle cx="25" cy="50" r="5" />
-                    <!-- Right Glass -->
                     <path d="M45 15 L45 35 Q45 40 40 40 L35 40" />
                     <path d="M35 40 L35 50" />
                     <circle cx="35" cy="50" r="5" />
-                    <!-- Clink Effect -->
                     <path d="M25 35 Q30 30 35 35" stroke-dasharray="5,5" />
                 </svg>
             </h1>
@@ -952,6 +798,12 @@
         // Simulated booked dates
         const bookedDates = ["11/15/2024", "11/20/2024", "12/01/2024"];
         
+        // Mode Toggle
+        $("#mode-toggle").click(function() {
+            $("body").toggleClass("dark-mode");
+            $(this).text($("body").hasClass("dark-mode") ? "Toggle Light Mode" : "Toggle Dark Mode");
+        });
+
         // Booking Form Submission
         function submitBookingForm() {
             var name = document.getElementById('name').value;
@@ -1403,13 +1255,20 @@
             
             // Fun Fact Ticker
             var facts = [
-                // [Same facts as original]
+                "A bartender can shake up to 100 cocktails in an hour!",
+                "The shortest war in history lasted 38 minutes.",
+                "Champagne was originally a mistake—winemakers thought the bubbles meant it had gone bad.",
+                "The world’s oldest known recipe is for beer, dating back 4,000 years.",
+                "In the 1800s, bartenders used to wear bow ties because they were harder to grab in a bar fight.",
+                "The term 'mixology' was coined in 1872!",
+                "Casinos in Las Vegas use chips to make you forget you're spending real money.",
+                "The fastest bartender in the world can open 12 bottles in under a minute."
             ];
             
             function updateFunFact() {
                 var fact = facts[Math.floor(Math.random() * facts.length)];
                 $("#fun-fact-box").fadeOut(500, function(){
-                    $(this).text(fact).fadeIn(500);
+                    $(this).text("Did you know? " + fact).fadeIn(500);
                 });
             }
             updateFunFact();
